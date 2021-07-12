@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Screen3 extends StatefulWidget {
+class ContactsScreen extends StatefulWidget {
   @override
-  _Screen3State createState() => _Screen3State();
+  _ContactsScreenState createState() => _ContactsScreenState();
 }
 
-class _Screen3State extends State<Screen3> {
+class _ContactsScreenState extends State<ContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //replace the body with the code for your page
       body: Center(
-        child: Text('Page 3'),
+        child: Text('Page 2'),
       ),
     );
   }

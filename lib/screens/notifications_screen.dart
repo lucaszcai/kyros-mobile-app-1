@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Screen4 extends StatefulWidget {
+class NotificationsScreen extends StatefulWidget {
   @override
-  _Screen4State createState() => _Screen4State();
+  _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
-class _Screen4State extends State<Screen4> {
+class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

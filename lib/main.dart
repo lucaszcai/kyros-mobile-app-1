@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kyros_app_mobile/screens/screen1.dart';
-import 'package:kyros_app_mobile/screens/screen2.dart';
-import 'package:kyros_app_mobile/screens/screen3.dart';
-import 'package:kyros_app_mobile/screens/screen4.dart';
+import 'package:kyros_app_mobile/screens/chat_screen.dart';
+import 'package:kyros_app_mobile/screens/contact_screen.dart';
+import 'package:kyros_app_mobile/screens/assignments_screen.dart';
+import 'package:kyros_app_mobile/screens/notifications_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  List pages = [Screen1(), Screen2(), Screen3(), Screen4()];
+  List pages = [ChatScreen(), ContactsScreen(), AssignmentsScreen(), NotificationsScreen()];
 
   @override
   Widget build(BuildContext context) {

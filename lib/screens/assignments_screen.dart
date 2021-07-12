@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Screen1 extends StatefulWidget {
+class AssignmentsScreen extends StatefulWidget {
   @override
-  _Screen1State createState() => _Screen1State();
+  _AssignmentsScreenState createState() => _AssignmentsScreenState();
 }
 
-class _Screen1State extends State<Screen1> {
+class _AssignmentsScreenState extends State<AssignmentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //replace the body with the code for your page
       body: Center(
-        child: Text('Page 1'),
+        child: Text('Page 3'),
       ),
     );
   }
