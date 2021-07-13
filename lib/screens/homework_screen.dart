@@ -1,8 +1,7 @@
-import 'package:assignments_page/assignmentspage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'assignmentmodel.dart';
-import 'assignmentpage.dart';
+import 'package:kyros_app_mobile/models/assignment_model.dart';
+import 'assignment_screen.dart';
 
 class HomeworkPage extends StatefulWidget {
 

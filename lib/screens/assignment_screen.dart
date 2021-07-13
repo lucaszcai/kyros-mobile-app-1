@@ -1,8 +1,8 @@
-import 'package:assignments_page/assignmentspage.dart';
 import 'package:flutter/cupertino.dart';
+import 'assignments_screen.dart';
 import 'package:flutter/material.dart';
-import 'assignmentmodel.dart';
-import 'homeworkpage.dart';
+import 'package:kyros_app_mobile/models/assignment_model.dart';
+import 'homework_screen.dart';
 
 class AssignmentPage extends StatefulWidget {
 
@@ -34,7 +34,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AssignmentsPage()
+                              builder: (context) => AssignmentsScreen()
                           )
                         );
                       },
