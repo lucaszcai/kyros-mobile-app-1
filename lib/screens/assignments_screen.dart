@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/assignment_model.dart';
 import 'package:kyros_app_mobile/models/assignment_comment_model.dart';
 
-class AssignmentsPage extends StatefulWidget {
-  _AssignmentsPageState createState() => _AssignmentsPageState();
+class AssignmentsScreen extends StatefulWidget {
+  _AssignmentsScreenState createState() => _AssignmentsScreenState();
 }
 
-class _AssignmentsPageState extends State<AssignmentsPage> {
+class _AssignmentsScreenState extends State<AssignmentsScreen> {
 
   List<Assignment> searched = assignments;
   String searchInput = '';
