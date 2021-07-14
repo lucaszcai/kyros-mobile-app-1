@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  List pages = [ChatScreen(), ContactsScreen(), AssignmentsScreen(), NotificationsScreen()];
+  List pages = [ChatScreen(), Screen1(), AssignmentsScreen(), NotificationsScreen()];
 
   @override
   Widget build(BuildContext context) {
