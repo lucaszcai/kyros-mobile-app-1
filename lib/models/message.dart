@@ -14,8 +14,8 @@ class Message {
 
 final User me = User(
   id: 0,
-  name: 'Gogo',
-  imageUrl: 'assets/Gogo.jpg',
+  name: 'Me',
+  imageUrl: 'assets/Me.jpg',
 );
 final User steeves = User(
   id: 1,

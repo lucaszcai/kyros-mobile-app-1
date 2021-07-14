@@ -11,19 +11,6 @@ class chatScreen extends StatefulWidget {
 }
 
 class _chatScreenState extends State<chatScreen> {
-  int _selectedIndex = 0;
-  int index = 0;
-  List<Widget> _widgetOptions = <Widget>[
-    chats(),
-    Text('Contact'),
-    Text('Work'),
-    Text('Message'),
-  ];
-  void _onItemTap(int index) {
-    setState(() {});
-    _selectedIndex = index;
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -105,7 +92,7 @@ class _chatScreenState extends State<chatScreen> {
                       ),
                     ),
                     VerticalDivider(
-                      color: Colors.blueGrey,
+                      color: Colors.black54,
                       thickness: 2,
                     ),
                     Expanded(
@@ -124,36 +111,10 @@ class _chatScreenState extends State<chatScreen> {
                 ),
               ),
               Expanded(
-                child: Center(
-                  child: _widgetOptions.elementAt(_selectedIndex),
-                ),
+                child: chats(),
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.blueGrey,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-              title: Text('Chat'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.contact_page_outlined),
-              title: Text('Contact'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.work),
-              title: Text('Work'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.doorbell),
-              title: Text('Notification'),
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTap,
         ),
       ),
     );
