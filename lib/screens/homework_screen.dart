@@ -42,7 +42,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
           Container(
             margin: const EdgeInsets.fromLTRB(30, 0, 30, 30),
             padding: const EdgeInsets.all(15),
-            height: 500,
+            height: 300,
             decoration: BoxDecoration(
               border: Border.all(
                 width: 1.0,

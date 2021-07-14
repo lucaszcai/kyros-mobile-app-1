@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/assignment_model.dart';
 import 'package:kyros_app_mobile/models/assignment_comment_model.dart';
+import 'assignment_screen.dart';
 
 class AssignmentsScreen extends StatefulWidget {
   _AssignmentsScreenState createState() => _AssignmentsScreenState();
@@ -38,10 +39,6 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
         title: Container(
           height: 40,
           width: 300,
@@ -65,12 +62,6 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
             ),
           ),
         ),
-        actions: <Widget>[
-          IconButton (
-            icon: Icon(Icons.add),
-            onPressed: () {},
-          )
-        ],
       ),
       body: Column (
         children: <Widget> [
@@ -102,118 +93,63 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   final Assignment assignment = searched[index];
                   return Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: Color(0xFF5C6170)
-                          )
-                      ),
-                      child: ExpansionTile(
-                        title: Container(
-                            child: Column (
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 215,
-                                      child: Text(
-                                          assignment.title,
-                                          style: TextStyle (
-                                              fontSize: 23.0,
-                                              color: Color(0xFF152332)
-                                          )
-                                      ),
-                                    ),
-                                    Text(updateCompletion(assignment.completed), style: TextStyle(
-                                      color: Color(0xFFF78154),
-                                      fontSize: 14.0,
-                                      fontStyle: FontStyle.italic,
-                                    ),),
-                                  ],
-                                ),
-                                SizedBox(height: 15),
-                                Row(
-                                  children: [
-                                    Text(
-                                        "${assignment.numComments} comments",
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                       color: Color(0xFF5C6170)
+                      )
+                    ),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AssignmentPage(assignment: assignment))
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 215,
+                                    child: Text(
+                                      assignment.title,
                                         style: TextStyle (
+                                            fontSize: 23.0,
                                             color: Color(0xFF152332)
-                                        )),
-                                    Spacer(),
-                                    Text(
-                                        'Due: ${assignment.dueDate.month}/${assignment.dueDate.day}/${assignment.dueDate.year}',
-                                        style: TextStyle (
-                                          color: Color(0xFF152332),
                                         )
                                     )
-                                  ],
-                                )
-                              ],
-                            )
-                        ),
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left:15.0, right: 15.0, top: 15.0),
-                            alignment: Alignment.centerLeft,
-                            child: Text(assignment.description),
-                          ),
-                          SizedBox(height: 10),
-                          Container(
-                              padding: EdgeInsets.all(15),
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: 3,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final Comment comment = comments[index];
-                                  return Container(
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: Color(0xFF5C6170)
-                                          )
-                                      ),
-                                      child: Column (
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                  comment.name,
-                                                  style: TextStyle (
-                                                      fontSize: 20.0,
-                                                      color: Color(0xFF152332)
-                                                  )
-                                              ),
-                                              Spacer(),
-                                              Text(
-                                                  '${comment.date.month}/${comment.date.day}/${comment.date.year}',
-                                                  style: TextStyle (
-                                                      color: Color(0xFF152332),
-                                                      fontSize: 12.0
-                                                  )
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(height: 5),
-                                          Text(comment.description),
-                                          SizedBox(height: 5),
-                                          Text(
-                                              '${comment.replies} replies',
-                                              style: TextStyle (
-                                                  fontSize: 12.0,
-                                                  color: Color(0xFF152332)
-                                              )
-                                          )
-                                        ],
+                                  ),
+                                  Text(updateCompletion(assignment.completed), style: TextStyle(
+                                    color: Color(0xFFF78154),
+                                    fontSize: 14.0,
+                                    fontStyle: FontStyle.italic,
+                                  ),),
+                                ]
+                              ),
+                              SizedBox(height: 15),
+                              Row(
+                                children: [
+                                  Text(
+                                      "${assignment.comments.length} comments",
+                                      style: TextStyle (
+                                          color: Color(0xFF152332)
+                                      )),
+                                  Spacer(),
+                                  Text(
+                                      'Due: ${assignment.dueDate.month}/${assignment.dueDate.day}/${assignment.dueDate.year}',
+                                      style: TextStyle (
+                                        color: Color(0xFF152332),
                                       )
-                                  );
-                                },
+                                  )
+                                ]
                               )
+                            ]
                           )
-                        ],
-                      )
+                        )
+                      ),
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {
@@ -226,6 +162,7 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
           ),
         ],
       ),
+      /*
       bottomNavigationBar: BottomAppBar(
         color: Color(0xFF152332),
         child: Row(
@@ -267,6 +204,8 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
           ],
         ),
       ),
+
+       */
     );
   }
 }
