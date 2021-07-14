@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'NotificationScreenListTile.dart';
+import 'package:kyros_app_mobile/models/NotificationScreenListTile.dart';
+
 
 class NotificationsScreen extends StatefulWidget {
   @override
