@@ -39,13 +39,8 @@ class _AssignmentPageState extends State<AssignmentPage> {
                   children: [
                     TextButton.icon(
                         onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AssignmentsScreen()
-                          )
-                        );
-                      },
+                          Navigator.pop(context);
+                        },
                       icon: Icon(CupertinoIcons.arrowtriangle_left_fill, color: Color(0xFFF78154),),
                       label: Text(' Back ', style: TextStyle(
                         color: Color(0xFF152332),

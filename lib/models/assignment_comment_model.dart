@@ -11,9 +11,3 @@ class Comment {
       this.replies
       );
 }
-
-List<Comment> comments = [
-  Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),
-  Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),
-  Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),
-];
