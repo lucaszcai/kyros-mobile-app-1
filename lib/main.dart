@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -33,7 +34,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  List pages = [ChatScreen(), Screen1(), AssignmentsScreen(), NotificationsScreen()];
+  List pages = [
+    ChatScreen(),
+    Screen1(),
+    AssignmentsScreen(),
+    NotificationsScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
