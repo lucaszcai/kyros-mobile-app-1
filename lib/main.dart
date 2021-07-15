@@ -48,10 +48,22 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           //change the icon and label to match what each page should be
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '1'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '2'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '3'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '4'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.contact_page_outlined),
+            label: 'Contact',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.work),
+            label: 'Work',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.doorbell),
+            label: 'Notification',
+          ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue[500],

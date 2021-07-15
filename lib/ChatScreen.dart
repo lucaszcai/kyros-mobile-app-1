@@ -31,7 +31,7 @@ class _chatScreenState extends State<chatScreen> {
                 ),
                 child: Icon(
                   Icons.arrow_back,
-                  color: Colors.blueGrey,
+                  color: Colors.blue,
                 ),
               ),
               Container(
@@ -61,7 +61,7 @@ class _chatScreenState extends State<chatScreen> {
                   },
                   child: Icon(
                     Icons.add,
-                    color: Colors.blueGrey,
+                    color: Colors.blue,
                   ),
                 ),
               ),
