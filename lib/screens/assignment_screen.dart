@@ -23,6 +23,8 @@ class _AssignmentPageState extends State<AssignmentPage> {
     return '';
   }
 
+  Comment newComment = Comment('username', '', DateTime.now(), 0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,9 +162,14 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                               keyboardType: TextInputType.multiline,
                                               maxLines: 7,
                                               maxLength: 250,
+                                              onChanged: (input) {
+                                                setState(() {
+                                                  newComment.description = input;
+                                                });
+                                              },
                                               decoration: new InputDecoration(
                                                 hintText: 'Add a comment...',
-                                              )
+                                              ),
                                             ),
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,6 +179,10 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                                   angle: math.pi / 4.0,
                                                   child: IconButton(
                                                     onPressed: () {
+                                                      setState(() {
+                                                        newComment.date = DateTime.now();
+                                                        widget.assignment.addComment(newComment);
+                                                      });
                                                       Navigator.of(context).pop();
                                                     },
                                                     icon: Icon(

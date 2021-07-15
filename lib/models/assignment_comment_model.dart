@@ -1,8 +1,8 @@
 class Comment {
   final String name;
-  final String description;
-  final DateTime date;
-  final int replies;
+  String description;
+  DateTime date;
+  int replies;
 
   Comment(
       this.name,
