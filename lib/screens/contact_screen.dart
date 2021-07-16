@@ -15,10 +15,7 @@ class _Screen1State extends State<Screen1> {
 
   void search() {
     setState(() {
-      if (searchInput == ''){
-        display_contacts = contacts;
-      }
-      else {
+      if (searchInput != ''){
         display_contacts = [];
         for (Contact contact in contacts) {
           if (contact.name.contains(searchInput)) {
@@ -26,6 +23,9 @@ class _Screen1State extends State<Screen1> {
 
           }
         }
+      }
+      else {
+        display_contacts = contacts;
 
       }
 
