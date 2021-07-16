@@ -10,80 +10,55 @@ class Screen1 extends StatefulWidget {
 }
 
 class _Screen1State extends State<Screen1> {
+  String searchInput = '';
+  List display_contacts = contacts;
+
+  void search() {
+    setState(() {
+      display_contacts.clear();
+    });
+    for (var i = 0; i < contacts.length; i++) {
+      if (contacts[i].name.contains(searchInput)) {
+        setState(() {
+          display_contacts.add(contacts[i]);
+          print(display_contacts);
+        });
+      }
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Container(
-          margin: EdgeInsets.only(
-              top: 5,
-              bottom: 5,
-              right: 0
-          ),
-
-
-          child: FlatButton(
-            onPressed: () {
-              ;
-            },
-            child: Icon(Icons.menu),
-            color: Colors.white,
-            shape: CircleBorder(),
-
-
-          ),
-        ),
         title: Container(
-          width: 500,
           height: 40,
-          margin: EdgeInsets.only(
-              left: 125
-          ),
-
-
-
+          width: 300,
+          alignment: Alignment.center,
           child: TextField(
-            decoration: const InputDecoration(
-              hintText: 'Search',
-              border: const OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(const Radius.circular(20.0))
-              ),
-
-              fillColor: Colors.white,
-              filled: true,
-
+            onChanged: (input) {
+              searchInput = input;
+              search();
+            },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(60.0),
+                  ),
+                ),
+                hintText: 'Search',
+                hintStyle: TextStyle(fontSize:16),
+                filled: true,
+                contentPadding: EdgeInsets.all(10),
+                fillColor: Colors.white
             ),
-
           ),
-
         ),
-        actions: [
-          Container(
-            margin: EdgeInsets.only(
-              right: 80,
-              top: 5,
-              bottom: 5,
-            ),
-
-            child: FlatButton(
-              onPressed: () {
-                ;
-              },
-              child: Icon(Icons.add),
-              color: Colors.white,
-              shape: CircleBorder(),
-
-
-            ),
-          )
-
-        ],
-        backgroundColor: Colors.blue[900],
       ),
       body: Center(
         child: ListView(
             children: [
-              for (var item = 0; item < contacts.length; item ++)
+              for (var item = 0; item < display_contacts.length; item ++)
                 Contact_Box(index: item)
             ]
 
