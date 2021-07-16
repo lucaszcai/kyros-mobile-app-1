@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kyros_app_mobile/ChatScreen.dart';
+
+import '../chats.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -10,9 +13,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       //replace the body with the code for your page
-      body: Center(
-        child: Text('Page 1'),
-      ),
+      body: Center(child: chatScreen()),
     );
   }
 }

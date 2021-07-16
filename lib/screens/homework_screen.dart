@@ -26,12 +26,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
             margin: EdgeInsets.fromLTRB(30, 10, 0, 10),
             child: TextButton.icon(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AssignmentPage(assignment: widget.assignment)
-                  )
-                );
+                Navigator.pop(context);
               },
               icon: Icon(CupertinoIcons.arrowtriangle_left_fill, color: Color(0xFFF78154),),
               label: Text('Back ', style: TextStyle(
