@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'contact_model.dart';
 
 class Contact_Box extends StatefulWidget {
-  int index;
+  Contact index;
 
   Contact_Box({
     required this.index,
@@ -16,10 +16,11 @@ class Contact_Box extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact_Box> {
-  int index;
+  Contact index;
 
   _ContactState({
     required this.index,
+
 
   });
   @override
@@ -81,13 +82,13 @@ class _ContactState extends State<Contact_Box> {
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(contacts[index].name)
+                                  Text(index.name)
                                 ]
                             ),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(contacts[index].role)
+                                  Text(index.role)
                                 ]
 
                             )
