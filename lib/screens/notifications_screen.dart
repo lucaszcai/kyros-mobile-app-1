@@ -11,16 +11,15 @@ class NotificationsScreen extends StatefulWidget {
 class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'msc',
-      home: new DefaultTabController(
+    return Scaffold(
+
+      body: new DefaultTabController(
         length: 2,
         child: new Scaffold(
           appBar: new PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
             child: new Container(
               color: Colors.black,
-
               child: new SafeArea(
                 child: Column(
                   children: <Widget>[
@@ -37,11 +36,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             children: <Widget>[
               new Column(
                 children: <Widget>[
-                  Container(child: getListView(), height:1000)],
+                  Expanded(
+                      child: Container(child: getListView(), ))],
               ),
               new Column(
                 children: <Widget>[
-                  Container(child: getListView(), height: 1000)],
+                  Expanded(child: Container(child: getListView(), ))],
               )
             ],
           ),

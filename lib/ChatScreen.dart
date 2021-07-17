@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
 
 import 'chats.dart';
 
@@ -18,7 +19,9 @@ class _chatScreenState extends State<chatScreen> {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
+        backgroundColor: StyleConstants.grey,
         appBar: AppBar(
+          backgroundColor: StyleConstants.black,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -37,7 +40,7 @@ class _chatScreenState extends State<chatScreen> {
               Container(
                 height: 35,
                 width: 250,
-                padding: EdgeInsets.only(top: 8, left: 5),
+                padding: EdgeInsets.only(top: 8, left: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),

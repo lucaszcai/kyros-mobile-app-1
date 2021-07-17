@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/contact_model.dart';
 import 'package:kyros_app_mobile/models/contacts.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
 
 
 class Screen1 extends StatefulWidget {
@@ -26,65 +27,48 @@ class _Screen1State extends State<Screen1> {
       }
       else {
         display_contacts = contacts;
-
       }
-
     });
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: StyleConstants.black,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-        Container(
-          height: 40,
-          width: 300,
-          alignment: Alignment.center,
-          child: TextField(
-            onChanged: (input) {
-              searchInput = input;
-              search();
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(60.0),
+        Expanded(
+          child: Container(
+            height: 40,
+            //width: 200,
+            alignment: Alignment.center,
+            child: TextField(
+              onChanged: (input) {
+                searchInput = input;
+                search();
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(60.0),
+                    ),
                   ),
-                ),
-                hintText: 'Search',
-                hintStyle: TextStyle(fontSize:16),
-                filled: true,
-                contentPadding: EdgeInsets.all(10),
-                fillColor: Colors.white
+                  hintText: 'Search',
+                  hintStyle: TextStyle(fontSize:16),
+                  filled: true,
+                  contentPadding: EdgeInsets.all(10),
+                  fillColor: Colors.white
+              ),
             ),
           ),
         ),
-            Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.only(
-                right: 55
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: FlatButton(onPressed: () {
-                ;
-              },
-                child: Text(''),
-                color: Colors.white,
-                shape: CircleBorder(),
-              )
-
-            )
         ]
-        )
+        ),
+        actions: [
+         IconButton(onPressed: () {}, icon: Icon(Icons.add))
+        ],
 
       ),
       body: Center(
