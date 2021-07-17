@@ -10,84 +10,206 @@ class Screen1 extends StatefulWidget {
 }
 
 class _Screen1State extends State<Screen1> {
+  String searchInput = '';
+  List display_contacts = contacts;
+
+  void search() {
+    setState(() {
+      if (searchInput != ''){
+        display_contacts = [];
+        for (Contact contact in contacts) {
+          if (contact.name.contains(searchInput)) {
+            display_contacts.add(contact);
+
+          }
+        }
+      }
+      else {
+        display_contacts = contacts;
+
+      }
+
+    });
+
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Container(
-          margin: EdgeInsets.only(
-              top: 5,
-              bottom: 5,
-              right: 0
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
 
-
-          child: FlatButton(
-            onPressed: () {
-              ;
-            },
-            child: Icon(Icons.menu),
-            color: Colors.white,
-            shape: CircleBorder(),
-
-
-          ),
-        ),
-        title: Container(
-          width: 500,
+        Container(
           height: 40,
-          margin: EdgeInsets.only(
-              left: 125
-          ),
-
-
-
+          width: 300,
+          alignment: Alignment.center,
           child: TextField(
-            decoration: const InputDecoration(
-              hintText: 'Search',
-              border: const OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(const Radius.circular(20.0))
-              ),
-
-              fillColor: Colors.white,
-              filled: true,
-
+            onChanged: (input) {
+              searchInput = input;
+              search();
+            },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(60.0),
+                  ),
+                ),
+                hintText: 'Search',
+                hintStyle: TextStyle(fontSize:16),
+                filled: true,
+                contentPadding: EdgeInsets.all(10),
+                fillColor: Colors.white
             ),
-
           ),
-
         ),
-        actions: [
-          Container(
-            margin: EdgeInsets.only(
-              right: 80,
-              top: 5,
-              bottom: 5,
-            ),
-
-            child: FlatButton(
-              onPressed: () {
+            Container(
+              height: 40,
+              width: 40,
+              margin: EdgeInsets.only(
+                right: 55
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: FlatButton(onPressed: () {
                 ;
               },
-              child: Icon(Icons.add),
-              color: Colors.white,
-              shape: CircleBorder(),
+                child: Text(''),
+                color: Colors.white,
+                shape: CircleBorder(),
+              )
 
+            )
+        ]
+        )
 
-            ),
-          )
-
-        ],
-        backgroundColor: Colors.blue[900],
       ),
       body: Center(
-        child: ListView(
-            children: [
-              for (var item = 0; item < contacts.length; item ++)
-                Contact_Box(index: item)
-            ]
+        child: ListView.builder(
+          itemCount: display_contacts.length,
+          itemBuilder: (BuildContext context, int index) {
+            final contact = display_contacts[index];
+            return Container(
 
-        ),
+              height: 60,
+              padding: EdgeInsets.only(
+                  top: 20,
+                  bottom: 0,
+                  left: 0,
+                  right: 0
+              ),
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 60,
+                    padding: EdgeInsets.only(
+                        left: 75,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    ),
+
+                    child: FlatButton(
+                      onPressed: () {
+                        ;
+                      },
+                      child: Text(''),
+                      color: Colors.white,
+                      shape: CircleBorder(),
+
+
+                    ),
+
+                  ),
+                  Container(
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(
+                          right:50,
+                          left: 30
+                      ),
+
+
+
+                      child: Row(
+
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            Container(
+
+                              height: 60,
+
+                              child: Column(
+                                  children: [
+                                    Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(contact.name)
+                                        ]
+                                    ),
+                                    Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(contact.role)
+                                        ]
+
+                                    )
+                                  ]
+                              ),
+
+
+                            ),
+                            Container(
+                                alignment: Alignment.centerRight,
+                                padding: EdgeInsets.only(
+                                    left: 125
+
+                                ),
+
+                                child: Row(
+                                    children: [
+                                      FlatButton(onPressed: () {
+                                        ;
+                                      },
+                                        child: Text(''),
+                                        color: Colors.white,
+                                        shape: CircleBorder(),
+                                      ),
+
+                                    ]
+                                )
+
+                            ),
+                          ]
+
+                      ),
+                      decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.green,
+                              width: 3.0,
+                            ),
+                          )
+                      )
+
+
+                  ),
+
+
+                ],
+
+              ),
+
+
+
+            );
+          }
+        )
 
       ),
       backgroundColor: Colors.grey[400],

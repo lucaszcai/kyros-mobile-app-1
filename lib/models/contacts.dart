@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'contact_model.dart';
 
 class Contact_Box extends StatefulWidget {
-  int index;
+  Contact index;
 
   Contact_Box({
     required this.index,
@@ -16,10 +16,11 @@ class Contact_Box extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact_Box> {
-  int index;
+  Contact index;
 
   _ContactState({
     required this.index,
+
 
   });
   @override
@@ -28,15 +29,22 @@ class _ContactState extends State<Contact_Box> {
 
       height: 60,
       padding: EdgeInsets.only(
-          top: 20
+          top: 20,
+          bottom: 0,
+          left: 0,
+          right: 0
       ),
 
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: 60,
-            margin: EdgeInsets.only(
-                left: 75
+            padding: EdgeInsets.only(
+                left: 75,
+                right: 0,
+                bottom: 0,
+                top: 0
             ),
 
             child: FlatButton(
@@ -52,28 +60,35 @@ class _ContactState extends State<Contact_Box> {
 
           ),
           Container(
+            alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(
+                right:50,
+                left: 30
+              ),
+
+
+
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                   children: [
                     Container(
-                      height: 60,
-                      width: 200,
-                      margin: EdgeInsets.only(
-                        left: 20,
 
-                      ),
+                      height: 60,
+
                       child: Column(
                           children: [
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(contacts[index].name)
+                                  Text(index.name)
                                 ]
                             ),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(contacts[index].role)
+                                  Text(index.role)
                                 ]
 
                             )
@@ -83,17 +98,13 @@ class _ContactState extends State<Contact_Box> {
 
                     ),
                     Container(
-                        margin: EdgeInsets.only(
-                            left: 340
-                        ),
-
-
+                        alignment: Alignment.centerRight,
                         padding: EdgeInsets.only(
-                            right: 50
+                          left: 125
+
                         ),
 
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               FlatButton(onPressed: () {
                                 ;
@@ -102,13 +113,7 @@ class _ContactState extends State<Contact_Box> {
                                 color: Colors.white,
                                 shape: CircleBorder(),
                               ),
-                              FlatButton(onPressed: () {
-                                ;
-                              },
-                                child: Text(''),
-                                color: Colors.white,
-                                shape: CircleBorder(),
-                              ),
+
                             ]
                         )
 
@@ -125,13 +130,15 @@ class _ContactState extends State<Contact_Box> {
                   )
               )
 
+
           ),
 
 
         ],
 
       ),
-      color: Colors.grey[400],
+
+
 
     );
   }
