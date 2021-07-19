@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/contact_model.dart';
 import 'package:kyros_app_mobile/models/contacts.dart';
 
+import 'add_contact_screen.dart';
+
 
 class Screen1 extends StatefulWidget {
   @override
@@ -93,9 +95,12 @@ class _Screen1State extends State<Screen1> {
                 borderRadius: BorderRadius.circular(100),
               ),
               child: FlatButton(onPressed: () {
-                ;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddContactScreen())
+                );
               },
-                child: Text(''),
+                child: Icon(Icons.add),
                 color: Colors.white,
                 shape: CircleBorder(),
               )
@@ -233,7 +238,7 @@ class _Screen1State extends State<Screen1> {
               ),
             ),
             Visibility(
-                maintainSize: true,
+                maintainSize: false,
                 maintainAnimation: true,
                 maintainState: true,
                 visible: showDescription,
