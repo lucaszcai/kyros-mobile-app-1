@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/assignment_model.dart';
 import 'package:kyros_app_mobile/models/assignment_comment_model.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
 import 'assignment_screen.dart';
 
 class AssignmentsScreen extends StatefulWidget {
@@ -39,49 +40,52 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          height: 40,
-          width: 300,
-          alignment: Alignment.center,
-          child: TextField(
-            onChanged: (input) {
-              searchInput = input;
-              search();
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(60.0),
+        backgroundColor: StyleConstants.black,
+        title: Expanded(
+          child: Container(
+            height: 40,
+            // width: 300,
+            alignment: Alignment.center,
+            child: TextField(
+              onChanged: (input) {
+                searchInput = input;
+                search();
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(60.0),
+                    ),
                   ),
-                ),
-                hintText: 'Search',
-                hintStyle: TextStyle(fontSize:16),
-                filled: true,
-                contentPadding: EdgeInsets.all(10),
-                fillColor: Colors.white
+                  hintText: 'Search',
+                  hintStyle: TextStyle(fontSize:16),
+                  filled: true,
+                  contentPadding: EdgeInsets.all(10),
+                  fillColor: Colors.white
+              ),
             ),
           ),
         ),
       ),
       body: Column (
         children: <Widget> [
-          Container(
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: Color(0xFF5C6170)
-                ),
-              ),
-              child: Center (
-                child: Text(
-                    'Assignments',
-                    style: TextStyle (
-                        fontSize: 35.0,
-                        color: Color(0xFF152332)
-                    )
-                ),
-              )
-          ),
+          // Container(
+          //     height: 100,
+          //     decoration: BoxDecoration(
+          //       border: Border.all(
+          //           color: Color(0xFF5C6170)
+          //       ),
+          //     ),
+          //     child: Center (
+          //       child: Text(
+          //           'Assignments',
+          //           style: TextStyle (
+          //               fontSize: 35.0,
+          //               color: Color(0xFF152332)
+          //           )
+          //       ),
+          //     )
+          // ),
           Expanded(
             child: Container(
               padding: EdgeInsets.all(15),

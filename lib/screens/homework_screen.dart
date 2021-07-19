@@ -16,9 +16,6 @@ class _HomeworkPageState extends State<HomeworkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Container(height: 40),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -100,47 +97,47 @@ class _HomeworkPageState extends State<HomeworkPage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF152332),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: IconButton(
-                icon: Icon(Icons.add_circle),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: IconButton(
-                icon: Icon(Icons.add_circle),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: IconButton(
-                icon: Icon(Icons.add_circle),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: IconButton(
-                icon: Icon(Icons.add_circle),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            )
-          ],
-        ),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   color: Color(0xFF152332),
+      //   child: Row(
+      //     mainAxisSize: MainAxisSize.max,
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: <Widget>[
+      //       Padding(
+      //         padding: const EdgeInsets.all(15.0),
+      //         child: IconButton(
+      //           icon: Icon(Icons.add_circle),
+      //           color: Colors.white,
+      //           onPressed: () {},
+      //         ),
+      //       ),
+      //       Padding(
+      //         padding: const EdgeInsets.all(15.0),
+      //         child: IconButton(
+      //           icon: Icon(Icons.add_circle),
+      //           color: Colors.white,
+      //           onPressed: () {},
+      //         ),
+      //       ),
+      //       Padding(
+      //         padding: const EdgeInsets.all(15.0),
+      //         child: IconButton(
+      //           icon: Icon(Icons.add_circle),
+      //           color: Colors.white,
+      //           onPressed: () {},
+      //         ),
+      //       ),
+      //       Padding(
+      //         padding: const EdgeInsets.all(15.0),
+      //         child: IconButton(
+      //           icon: Icon(Icons.add_circle),
+      //           color: Colors.white,
+      //           onPressed: () {},
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      // ),
     );
   }
 
