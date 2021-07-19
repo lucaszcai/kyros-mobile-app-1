@@ -17,7 +17,7 @@ class NotificationScreenListTile extends StatelessWidget {
 
     return  Slidable(
       actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
+      actionExtentRatio: 0.15,
       child: Container(
         color: Colors.white,
         child: ListTile(
@@ -33,12 +33,10 @@ class NotificationScreenListTile extends StatelessWidget {
 
       secondaryActions: <Widget>[
         IconSlideAction(
-
           color: Colors.black45,
           icon: Icons.star,
         ),
         IconSlideAction(
-
           color: Colors.red,
           icon: Icons.delete,
         ),
