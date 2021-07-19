@@ -250,7 +250,6 @@ class MessageWidget extends StatelessWidget {
   }
 }
 
-
 class Message {
   final int authorID;
   final String authorName;
@@ -261,5 +260,4 @@ class Message {
   Message(this.authorID, this.authorName, this.content, {this.bySelf: false}) {
     time = DateTime.now();
   }
-
 }

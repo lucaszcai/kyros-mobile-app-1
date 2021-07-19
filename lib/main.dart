@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kyros_app_mobile/screens/chat_screen.dart';
+import 'package:kyros_app_mobile/screens/ChatScreen.dart';
 import 'package:kyros_app_mobile/screens/contact_screen.dart';
 import 'package:kyros_app_mobile/screens/assignments_screen.dart';
 import 'package:kyros_app_mobile/screens/notifications_screen.dart';
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Kyros Mobile App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   List pages = [
-    ChatScreen(),
+    chatScreen(),
     Screen1(),
     AssignmentsScreen(),
     NotificationsScreen()
