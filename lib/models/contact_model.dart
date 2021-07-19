@@ -11,7 +11,7 @@ class Contact {
   });
 }
 
-List contacts = [
+List<Contact> contacts = [
   Contact(name: "jeff", role: "manager", description: "hello, how are you doing"),
   Contact(name: "joe", role: "student", description: "hello, how are you doing"),
   Contact(name: "nellie", role: "manager", description: "hello, how are you doing"),
@@ -20,7 +20,7 @@ List contacts = [
 
 ];
 
-List AllKyrosUsers = [
+List<Contact> AllKyrosUsers = [
   Contact(name: "jeff", role: "manager", description: "hello, how are you doing"),
   Contact(name: "joe", role: "student", description: "hello, how are you doing"),
   Contact(name: "nellie", role: "manager", description: "hello, how are you doing"),

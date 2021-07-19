@@ -13,30 +13,29 @@ class Screen1 extends StatefulWidget {
 
 class _Screen1State extends State<Screen1> {
   String searchInput = '';
-  List display_contacts = contacts;
+  List<Contact> display_contacts = contacts;
   bool showDescription = false;
   int selectedContact = 0;
 
   void search() {
     setState(() {
-      if (searchInput != ''){
+      if (searchInput == '') {
+        display_contacts = contacts;
+      } else {
         display_contacts = [];
         for (Contact contact in contacts) {
-          if (contact.name.contains(searchInput)) {
-            display_contacts.add(contact);
-
+          if (contact.name.length >= searchInput.length) {
+            if (contact.name.toLowerCase().contains(searchInput.toLowerCase())) {
+              display_contacts.add(contact);
+            }
           }
         }
       }
-      else {
-        display_contacts = contacts;
-
-      }
-
     });
 
 
   }
+
 
   void viewDescription(int index) {
     if (showDescription == true) {
@@ -202,7 +201,7 @@ class _Screen1State extends State<Screen1> {
                                               FlatButton(onPressed: () {
                                                 ;
                                               },
-                                                child: Text(''),
+                                                child: Icon(Icons.chat),
                                                 color: Colors.white,
                                                 shape: CircleBorder(),
                                               ),
@@ -266,7 +265,7 @@ class _Screen1State extends State<Screen1> {
                                   child: FlatButton(onPressed: () {
                                     ;
                                   },
-                                    child: Icon(Icons.add_comment_rounded),
+                                    child: Icon(Icons.chat),
                                     color: Colors.white,
                                     shape: CircleBorder(),
 
