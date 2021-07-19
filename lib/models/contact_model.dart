@@ -1,29 +1,31 @@
 class Contact {
   String name;
   String role;
+  String description;
 
   Contact({
     required this.name,
-    required this.role
+    required this.role,
+    required this.description
 
   });
 }
 
 List contacts = [
-  Contact(name: "jeff", role: "manager"),
-  Contact(name: "joe", role: "student"),
-  Contact(name: "nellie", role: "manager"),
-  Contact(name: "bob", role: "student"),
+  Contact(name: "jeff", role: "manager", description: "hello, how are you doing"),
+  Contact(name: "joe", role: "student", description: "hello, how are you doing"),
+  Contact(name: "nellie", role: "manager", description: "hello, how are you doing"),
+  Contact(name: "bob", role: "student", description: "hello, how are you doing"),
 
 
 ];
 
 List AllKyrosUsers = [
-  Contact(name: "jeff", role: "manager"),
-  Contact(name: "joe", role: "student"),
-  Contact(name: "nellie", role: "manager"),
-  Contact(name: "bob", role: "student"),
-  Contact(name: "daren", role: "student"),
-  Contact(name: "jim", role: "manager"),
-  Contact(name: "joey", role: "student"),
+  Contact(name: "jeff", role: "manager", description: "hello, how are you doing"),
+  Contact(name: "joe", role: "student", description: "hello, how are you doing"),
+  Contact(name: "nellie", role: "manager", description: "hello, how are you doing"),
+  Contact(name: "bob", role: "student", description: "hello, how are you doing"),
+  Contact(name: "daren", role: "student", description: "hello, how are you doing"),
+  Contact(name: "jim", role: "manager", description: "hello, how are you doing"),
+  Contact(name: "joey", role: "student", description: "hello, how are you doing"),
 ];

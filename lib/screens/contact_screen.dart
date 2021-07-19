@@ -252,10 +252,90 @@ class _Screen1State extends State<Screen1> {
                       color: Colors.black12
                     ),
 
-                    child: Center(child: Text(display_contacts[selectedContact].name,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,
-                            fontSize: 23)))
+                    child: Center(
+                        child: Column(
+                          children: [
+                            Row(
+
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    top: 10
+                        ),
+                                  child: FlatButton(onPressed: () {
+                                    ;
+                                  },
+                                    child: Icon(Icons.add_comment_rounded),
+                                    color: Colors.white,
+                                    shape: CircleBorder(),
+
+
+
+                                  ),
+                                )
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 50,
+                                        height: 50,
+                                        margin: EdgeInsets.only(
+                                          left: 15,
+                                          right: 10
+                                        ),
+                                        child: FlatButton(onPressed: () {
+                                          ;
+                                        },
+                                          child: Text(''),
+                                          color: Colors.white,
+                                          shape: CircleBorder(),
+
+
+
+                                        ),
+                                      ),
+                                      Text(display_contacts[selectedContact].name, style: TextStyle (
+                                          fontSize: 20.0,
+
+                                      ))
+                                    ],
+                                  )
+                                )
+                              ],
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(
+                                left: 15,
+                                right: 15,
+                                top: 25,
+                                bottom: 5
+                              ),
+                              padding: const EdgeInsets.only(
+                                top: 30,
+                                bottom: 30,
+                                right: 10,
+
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                              ),
+                              child: Text((display_contacts[selectedContact].description)
+
+                            )
+                            )
+
+                          ],
+                    )
+                )
                 )
             ),
           ]
