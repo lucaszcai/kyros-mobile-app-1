@@ -1,27 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/contact_model.dart';
-import 'package:kyros_app_mobile/models/contacts.dart';
 
-import 'add_contact_screen.dart';
-
-
-class Screen1 extends StatefulWidget {
+class AddContactScreen extends StatefulWidget {
   @override
-  _Screen1State createState() => _Screen1State();
+  _AddContactScreenState createState() => _AddContactScreenState();
+
 }
 
-class _Screen1State extends State<Screen1> {
+class _AddContactScreenState extends State<AddContactScreen> {
   String searchInput = '';
-  List display_contacts = contacts;
+  List display_contacts = AllKyrosUsers;
   bool showDescription = false;
   int selectedContact = 0;
+  bool mutualContact = true;
 
   void search() {
     setState(() {
       if (searchInput != ''){
         display_contacts = [];
-        for (Contact contact in contacts) {
+        for (Contact contact in AllKyrosUsers) {
           if (contact.name.contains(searchInput)) {
             display_contacts.add(contact);
 
@@ -29,7 +27,7 @@ class _Screen1State extends State<Screen1> {
         }
       }
       else {
-        display_contacts = contacts;
+        display_contacts = AllKyrosUsers;
 
       }
 
@@ -52,7 +50,17 @@ class _Screen1State extends State<Screen1> {
     }
 
   }
-
+  bool checkMutualContact(String index) {
+    for (Contact contact in contacts) {
+      if(index.contains(contact.name)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+  }
+    return false;
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,49 +69,46 @@ class _Screen1State extends State<Screen1> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
 
-        Container(
-          height: 40,
-          width: 300,
-          alignment: Alignment.center,
-          child: TextField(
-            onChanged: (input) {
-              searchInput = input;
-              search();
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(60.0),
+                Container(
+                  height: 40,
+                  width: 300,
+                  alignment: Alignment.center,
+                  child: TextField(
+                    onChanged: (input) {
+                      searchInput = input;
+                      search();
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(60.0),
+                          ),
+                        ),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(fontSize:16),
+                        filled: true,
+                        contentPadding: EdgeInsets.all(10),
+                        fillColor: Colors.white
+                    ),
                   ),
                 ),
-                hintText: 'Search',
-                hintStyle: TextStyle(fontSize:16),
-                filled: true,
-                contentPadding: EdgeInsets.all(10),
-                fillColor: Colors.white
-            ),
-          ),
-        ),
-            Container(
-              height: 40,
-              width: 40,
-              margin: EdgeInsets.only(
-                right: 55
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: FlatButton(onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddContactScreen())
-                );
-              },
-                child: Icon(Icons.add),
-                color: Colors.white,
-                shape: CircleBorder(),
-              )
+                Container(
+                    height: 40,
+                    width: 40,
+                    margin: EdgeInsets.only(
+                        right: 55
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: FlatButton(onPressed: () {
+                      ;
+                    },
+                      child: Icon(Icons.add, color: Colors.grey),
+                      color: Colors.white,
+                      shape: CircleBorder(),
+                    )
 
                 )
               ]
@@ -202,7 +207,8 @@ class _Screen1State extends State<Screen1> {
                                                   FlatButton(onPressed: () {
                                                     ;
                                                   },
-                                                    child: Text(''),
+                                                    child: _buildIcon(contact),
+
                                                     color: Colors.white,
                                                     shape: CircleBorder(),
                                                   ),
@@ -233,24 +239,24 @@ class _Screen1State extends State<Screen1> {
 
 
 
-                    );
-                  }
-              ),
-            ),
-            Visibility(
-                maintainSize: false,
-                maintainAnimation: true,
-                maintainState: true,
-                visible: showDescription,
-                child: Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.red,
-                      ),
-                      color: Colors.black12
-                    ),
+                        );
+                      }
+                  ),
+                ),
+                Visibility(
+                    maintainSize: false,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    visible: showDescription,
+                    child: Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1,
+                              color: Colors.red,
+                            ),
+                            color: Colors.black12
+                        ),
 
                         child: Center(child: Text(display_contacts[selectedContact].name,
                             textAlign: TextAlign.center,
@@ -264,6 +270,17 @@ class _Screen1State extends State<Screen1> {
 
       ),
       backgroundColor: Colors.grey[400],
+
     );
+  }
+  Widget _buildIcon(Contact index) {
+    checkMutualContact(index.name);
+
+    if (checkMutualContact(index.name) == true) {
+      return Icon(Icons.remove);
+    }
+    else {
+      return Icon(Icons.add);
+    }
   }
 }
