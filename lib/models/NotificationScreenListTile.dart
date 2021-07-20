@@ -14,8 +14,7 @@ class NotificationScreenListTile extends StatelessWidget {
   // build a custom ExpansionTile
   @override
   Widget build(BuildContext context) {
-
-    return  Slidable(
+    return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
@@ -30,21 +29,16 @@ class NotificationScreenListTile extends StatelessWidget {
           subtitle: Text('Caption'),
         ),
       ),
-
       secondaryActions: <Widget>[
         IconSlideAction(
-
           color: Colors.black45,
           icon: Icons.star,
         ),
         IconSlideAction(
-
           color: Colors.red,
           icon: Icons.delete,
         ),
       ],
     );
-
-
   }
 }
