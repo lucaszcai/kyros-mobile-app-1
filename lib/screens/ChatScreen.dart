@@ -27,19 +27,7 @@ class _chatScreenState extends State<chatScreen> {
             children: [
               Container(
                 height: 35,
-                width: 35,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.blue,
-                ),
-              ),
-              Container(
-                height: 35,
-                width: 250,
+                width: MediaQuery.of(context).size.width * 0.8,
                 padding: EdgeInsets.only(top: 8, left: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
