@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class StyleConstants{
-
   static Color black = new Color(0xff152332);
 
   static Color darkGrey = new Color(0xffD3D3D3);
