@@ -3,6 +3,7 @@ import 'package:kyros_app_mobile/screens/ChatScreen.dart';
 import 'package:kyros_app_mobile/screens/contact_screen.dart';
 import 'package:kyros_app_mobile/screens/assignments_screen.dart';
 import 'package:kyros_app_mobile/screens/notifications_screen.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,16 +59,19 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.work),
-            label: 'Work',
+            label: 'Assignments',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.doorbell),
+            icon: Icon(Icons.notifications),
             label: 'Notification',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue[500],
-        unselectedItemColor: Colors.black38,
+        // selectedItemColor: Colors.blue[500],
+        unselectedItemColor: Colors.white38,
+        selectedItemColor: Colors.white,
+        backgroundColor: StyleConstants.black,
+        type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         onTap: (int index) {
           setState(() {

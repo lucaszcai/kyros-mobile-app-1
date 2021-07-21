@@ -13,30 +13,29 @@ class Screen1 extends StatefulWidget {
 
 class _Screen1State extends State<Screen1> {
   String searchInput = '';
-  List display_contacts = contacts;
+  List<Contact> display_contacts = contacts;
   bool showDescription = false;
   int selectedContact = 0;
 
   void search() {
     setState(() {
-      if (searchInput != ''){
+      if (searchInput == '') {
+        display_contacts = contacts;
+      } else {
         display_contacts = [];
         for (Contact contact in contacts) {
-          if (contact.name.contains(searchInput)) {
-            display_contacts.add(contact);
-
+          if (contact.name.length >= searchInput.length) {
+            if (contact.name.toLowerCase().contains(searchInput.toLowerCase())) {
+              display_contacts.add(contact);
+            }
           }
         }
       }
-      else {
-        display_contacts = contacts;
-
-      }
-
     });
 
 
   }
+
 
   void viewDescription(int index) {
     if (showDescription == true) {
@@ -57,9 +56,9 @@ class _Screen1State extends State<Screen1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
 
         Container(
           height: 40,
@@ -105,131 +104,131 @@ class _Screen1State extends State<Screen1> {
                 shape: CircleBorder(),
               )
 
-            )
-        ]
-        )
+                )
+              ]
+          )
 
       ),
       body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                  itemCount: display_contacts.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final contact = display_contacts[index];
-                    return Container(
+          child: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: display_contacts.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final contact = display_contacts[index];
+                        return Container(
 
-                      height: 60,
-                      padding: EdgeInsets.only(
-                          top: 20,
-                          bottom: 0,
-                          left: 0,
-                          right: 0
-                      ),
-
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: 60,
-                            padding: EdgeInsets.only(
-                                left: 75,
-                                right: 0,
-                                bottom: 0,
-                                top: 0
-                            ),
-
-                            child: FlatButton(
-                              onPressed: () {
-                                viewDescription(index);
-                              },
-                              child: Text(''),
-                              color: Colors.white,
-                              shape: CircleBorder(),
-
-
-                            ),
-
+                          height: 60,
+                          padding: EdgeInsets.only(
+                              top: 20,
+                              bottom: 0,
+                              left: 0,
+                              right: 0
                           ),
-                          Container(
-                              alignment: Alignment.centerRight,
-                              padding: EdgeInsets.only(
-                                  right:50,
-                                  left: 30
+
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: 60,
+                                padding: EdgeInsets.only(
+                                    left: 75,
+                                    right: 0,
+                                    bottom: 0,
+                                    top: 0
+                                ),
+
+                                child: FlatButton(
+                                  onPressed: () {
+                                    viewDescription(index);
+                                  },
+                                  child: Text(''),
+                                  color: Colors.white,
+                                  shape: CircleBorder(),
+
+
+                                ),
+
                               ),
+                              Container(
+                                  alignment: Alignment.centerRight,
+                                  padding: EdgeInsets.only(
+                                      right:50,
+                                      left: 30
+                                  ),
 
 
 
-                              child: Row(
+                                  child: Row(
 
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                                  children: [
-                                    Container(
+                                      children: [
+                                        Container(
 
-                                      height: 60,
+                                          height: 60,
 
-                                      child: Column(
-                                          children: [
-                                            Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text(contact.name)
-                                                ]
-                                            ),
-                                            Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text(contact.role)
-                                                ]
+                                          child: Column(
+                                              children: [
+                                                Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(contact.name)
+                                                    ]
+                                                ),
+                                                Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(contact.role)
+                                                    ]
 
-                                            )
-                                          ]
-                                      ),
+                                                )
+                                              ]
+                                          ),
 
-
-                                    ),
-                                    Container(
-                                        alignment: Alignment.centerRight,
-                                        padding: EdgeInsets.only(
-                                            left: 125
 
                                         ),
+                                        Container(
+                                            alignment: Alignment.centerRight,
+                                            padding: EdgeInsets.only(
+                                                left: 125
+
+                                            ),
 
                                         child: Row(
                                             children: [
                                               FlatButton(onPressed: () {
                                                 ;
                                               },
-                                                child: Text(''),
+                                                child: Icon(Icons.chat),
                                                 color: Colors.white,
                                                 shape: CircleBorder(),
                                               ),
 
-                                            ]
-                                        )
+                                                ]
+                                            )
 
-                                    ),
-                                  ]
+                                        ),
+                                      ]
+
+                                  ),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: Colors.green,
+                                          width: 3.0,
+                                        ),
+                                      )
+                                  )
+
 
                               ),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: Colors.green,
-                                      width: 3.0,
-                                    ),
-                                  )
-                              )
 
+
+                            ],
 
                           ),
-
-
-                        ],
-
-                      ),
 
 
 
@@ -266,7 +265,7 @@ class _Screen1State extends State<Screen1> {
                                   child: FlatButton(onPressed: () {
                                     ;
                                   },
-                                    child: Icon(Icons.add_comment_rounded),
+                                    child: Icon(Icons.chat),
                                     color: Colors.white,
                                     shape: CircleBorder(),
 

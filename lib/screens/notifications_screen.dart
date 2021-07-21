@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/NotificationScreenListTile.dart';
 
-
-
 class NotificationsScreen extends StatefulWidget {
   @override
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
+// comment to test edit perms, remove later
+
 class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'msc',
-      home: new DefaultTabController(
+    return Scaffold(
+      body: new DefaultTabController(
         length: 2,
         child: new Scaffold(
           appBar: new PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
             child: new Container(
               color: Colors.black,
-
               child: new SafeArea(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    new Expanded(child: new Container()),
                     new TabBar(
-                      tabs: [new Text("Message Notifications"), new Text("Assignment Notifications")],
+                      tabs: [
+                        new Text("Message Notifications"),
+                        new Text("Assignment Notifications")
+                      ],
                     ),
                   ],
                 ),
@@ -37,18 +38,27 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             children: <Widget>[
               new Column(
                 children: <Widget>[
-                  Container(child: getListView(), height:1000)],
+                  Expanded(
+                    child: Container(
+                      child: getListView(),
+                    ),
+                  ),
+                ],
               ),
               new Column(
                 children: <Widget>[
-                  Container(child: getListView(), height: 1000)],
+                  Expanded(
+                    child: Container(
+                      child: getListView(),
+                    ),
+                  ),
+                ],
               )
             ],
           ),
         ),
       ),
     );
-
   }
 // Widget build(BuildContext context) {
 //   return Scaffold(
@@ -99,7 +109,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 // in format [[title1, desc1], [title2, desc2], ...]
 // TODO: this is a placeholder, replace with something that gets the actual info for notifications
 List<List> getListElements() {
-  var items = List<List>.generate(1000, (counter) => ["Notification $counter","description $counter"]);
+  var items = List<List>.generate(
+      1000, (counter) => ["Notification $counter", "description $counter"]);
   return items;
 }
 
@@ -112,14 +123,13 @@ Widget getListView() {
 
   // build the thing
   var listView = ListView.builder(
-      padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-      itemBuilder: (context,index) {
+      // padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+      itemBuilder: (context, index) {
         return NotificationScreenListTile(
           title: listItems[index][0],
           description: listItems[index][1],
         );
-      }
-  );
+      });
 
   // return built ListView when this function is called
   return listView;
