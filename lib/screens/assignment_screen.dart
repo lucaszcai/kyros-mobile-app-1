@@ -42,7 +42,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                           CupertinoIcons.arrowtriangle_left_fill,
                           color: Color(0xFFF78154),
                         ),
-                        label: Text(' Back ',
+                        label: Text('Back ',
                             style: TextStyle(
                               color: Color(0xFF152332),
                             ))),
