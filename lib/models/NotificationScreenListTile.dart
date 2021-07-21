@@ -35,6 +35,7 @@ class NotificationScreenListTile extends StatelessWidget {
         IconSlideAction(
 
           color: Colors.black45,
+          
           icon: Icons.star,
         ),
         IconSlideAction(
