@@ -41,8 +41,7 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: StyleConstants.black,
-        title: Expanded(
-          child: Container(
+        title: Container(
             height: 40,
             // width: 300,
             alignment: Alignment.center,
@@ -66,7 +65,6 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
             ),
           ),
         ),
-      ),
       body: Column (
         children: <Widget> [
           // Container(

@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/assignment_model.dart';
 import 'assignment_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomeworkPage extends StatefulWidget {
 
@@ -12,6 +14,17 @@ class HomeworkPage extends StatefulWidget {
 }
 
 class _HomeworkPageState extends State<HomeworkPage> {
+
+  File? _pickedImage;
+
+  Future<File> pickImage(ImageSource source) async {
+    PickedFile? picked = await ImagePicker().getImage(source: source);
+    if (picked != null) {
+      return File(picked.path);
+    } else {
+      return File('');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +65,39 @@ class _HomeworkPageState extends State<HomeworkPage> {
                 Text('Due: ${widget.assignment.dueDate.month}/${widget.assignment.dueDate.day}/${widget.assignment.dueDate.year}'),
                 Text('Description: ${widget.assignment.description}'),
                 TextButton(
-                  onPressed: () {},
-                  child: Text('Upload File')
+                  onPressed: () async {
+                    ImageSource returnedSource = await showDialog(
+                      context: context,
+                      builder: (BuildContext context) => new AlertDialog(
+                        content: Column(
+                          children: [
+                            TextButton.icon(
+                              onPressed: () => Navigator.pop(context, ImageSource.camera),
+                              icon: Icon(CupertinoIcons.camera_fill, color: Color(0xFF152332),),
+                              label: Text('Take Photo')
+                            ),
+                            TextButton.icon(
+                              onPressed: () => Navigator.pop(context, ImageSource.gallery),
+                              icon: Icon(CupertinoIcons.photo_fill_on_rectangle_fill, color: Color(0xFF152332)),
+                              label: Text('Choose From Gallery')
+                            )
+                          ]
+                        ),
+                      )
+                    );
+
+                    File returnedImage = await pickImage(returnedSource);
+                    setState(() {
+                      _pickedImage = returnedImage;
+                    });
+
+                  },
+                  child: Text('Upload Image')
+                ),
+                Center(
+                  child: Container(
+                    child: _pickedImage != null ? Image.file(_pickedImage!) : Text('No image uploaded')
+                  )
                 ),
                 Spacer(),
                 Row(
