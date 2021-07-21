@@ -52,7 +52,7 @@ class _chatScreenState extends State<chatScreen> {
                   },
                   child: Icon(
                     Icons.add,
-                    color: Colors.blue,
+                    color: Colors.black,
                   ),
                 ),
               ),

@@ -22,6 +22,7 @@ class chats extends StatelessWidget {
               bottom: 5,
             ),
             child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -89,13 +90,9 @@ class chats extends StatelessWidget {
                         color: Colors.black45,
                         icon: Icons.star,
                       ),
-                      ClipRRect(
-                        borderRadius:
-                            BorderRadius.horizontal(right: Radius.circular(20)),
-                        child: IconSlideAction(
-                          color: Colors.red,
-                          icon: Icons.delete,
-                        ),
+                      IconSlideAction(
+                        color: Colors.red,
+                        icon: Icons.delete,
                       ),
                     ],
                   ),
