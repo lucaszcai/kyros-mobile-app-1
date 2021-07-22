@@ -75,7 +75,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
                               builder: (BuildContext context) => new AlertDialog(
                                   content: Container(
                                     width: 300,
-                                    height: 75,
+                                    height: 125,
                                     child: Column(
                                         children: [
                                           TextButton.icon(

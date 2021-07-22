@@ -22,7 +22,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
     return '';
   }
 
-  Comment newComment = Comment('username', '', DateTime.now(), 0);
+  String newComment = '';
 
   @override
   Widget build(BuildContext context) {
@@ -163,35 +163,26 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                                             mainAxisSize: MainAxisSize.min,
                                                             children: [
                                                               TextField(
-                                                                keyboardType:
-                                                                TextInputType
-                                                                    .multiline,
+                                                                keyboardType: TextInputType.multiline,
                                                                 maxLines: 5,
                                                                 maxLength: 250,
                                                                 onChanged: (input) {
                                                                   setState(() {
-                                                                    newComment
-                                                                        .description =
-                                                                        input;
+                                                                    newComment = input;
                                                                   });
                                                                 },
                                                                 decoration:
                                                                 new InputDecoration(
-                                                                  hintText:
-                                                                  'Add a comment...',
+                                                                  hintText: 'Add a comment...',
                                                                 ),
                                                               ),
                                                               Container(
-
                                                                 child: Row(
-                                                                  mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
+                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                   children: [
                                                                     Text(
                                                                       '250 character limit',
-                                                                      style: TextStyle(
-                                                                          fontSize: 15.0),
+                                                                      style: TextStyle(fontSize: 15.0),
                                                                     ),
                                                                     Transform.rotate(
                                                                       angle:
@@ -199,24 +190,13 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                                                       child: IconButton(
                                                                         onPressed: () {
                                                                           setState(() {
-                                                                            newComment
-                                                                                .date =
-                                                                                DateTime
-                                                                                    .now();
-                                                                            widget
-                                                                                .assignment
-                                                                                .addComment(
-                                                                                newComment);
+                                                                            widget.assignment.addComment(new Comment('username', newComment, DateTime.now(), 0));
                                                                           });
-                                                                          Navigator.of(
-                                                                              context)
-                                                                              .pop();
+                                                                          Navigator.of(context).pop();
                                                                         },
                                                                         icon: Icon(
-                                                                          CupertinoIcons
-                                                                              .paperplane_fill,
-                                                                          color: Color(
-                                                                              0xFFF78154),
+                                                                          CupertinoIcons.paperplane_fill,
+                                                                          color: Color(0xFFF78154),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -238,12 +218,10 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                       child: Row(children: [
                                         Icon(CupertinoIcons.plus_circle,
                                             color: Colors.black),
-                                        Text('reply',
-                                            style: TextStyle(color: Colors.black)),
+                                        Text('reply', style: TextStyle(color: Colors.black)),
                                       ]))
                                 ]),
-                                Text(
-                                    'Due: ${widget.assignment.dueDate.month}/${widget.assignment.dueDate.day}/${widget.assignment.dueDate.year}')
+                                Text('Due: ${widget.assignment.dueDate.month}/${widget.assignment.dueDate.day}/${widget.assignment.dueDate.year}')
                               ])
                         ])),
               ),
