@@ -5,14 +5,14 @@ import 'package:kyros_app_mobile/widgets/search_bar_widget.dart';
 
 import 'chats.dart';
 
-class chatScreen extends StatefulWidget {
-  const chatScreen({Key? key}) : super(key: key);
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({Key? key}) : super(key: key);
 
   @override
-  _chatScreenState createState() => _chatScreenState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _chatScreenState extends State<chatScreen> {
+class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -40,59 +40,56 @@ class _chatScreenState extends State<chatScreen> {
                   },
                   child: Icon(
                     Icons.add,
-                    color: Colors.black,
+                    color: StyleConstants.black,
                   ),
                 ),
               ),
             ],
           ),
         ),
-        body: Container(
-          decoration: BoxDecoration(color: Colors.black12),
-          child: Column(
-            children: [
-              Container(
-                color: Colors.white,
-                height: 30,
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        child: Text(
-                          'Direct Message',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black54,
+        body: new DefaultTabController(
+          length: 2,
+          child: new Scaffold(
+            appBar: new PreferredSize(
+              preferredSize: Size.fromHeight(30),
+              child: new Container(
+                color: StyleConstants.black,
+                child: new SafeArea(
+                    child: new TabBar(
+                        tabs: [
+                          new Container(
+                            child: new Tab(text: 'Direct Messages'),
                           ),
-                        ),
+                          new Container(
+                            child: new Tab(text: 'Group Messages'),
+                          ),
+                        ],
                       ),
-                    ),
-                    VerticalDivider(
-                      color: Colors.black54,
-                      thickness: 2,
-                    ),
+                  ),
+              ),
+            ),
+            body: new TabBarView(
+              children: <Widget>[
+                new Column(
+                  children: <Widget>[
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(),
-                        child: Text(
-                          'Group Message',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black54,
-                          ),
-                        ),
+                        child: chats(),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Expanded(
-                child: chats(),
-              ),
-            ],
+                new Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        child: chats(),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
 
 class MessageChat extends StatefulWidget {
   const MessageChat({Key? key}) : super(key: key);
@@ -47,7 +48,7 @@ class _MessageChatState extends State<MessageChat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF5C6170),
+        backgroundColor: StyleConstants.black,
         title: Row(
           children: [
             CircleAvatar(),
@@ -88,7 +89,7 @@ class _MessageChatState extends State<MessageChat> {
             ),
           ),
           Container(
-            color: Color(0xFF152332),
+            color: StyleConstants.black,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -139,7 +140,7 @@ class _MessageChatState extends State<MessageChat> {
                     child: TextField(
                       controller: messageInputController,
                       autocorrect: true,
-                      cursorColor: Color(0xFF393C46),
+                      cursorColor: StyleConstants.black,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         fillColor: Color(0xFFFFFFFF),
