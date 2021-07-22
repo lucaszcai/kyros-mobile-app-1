@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kyros_app_mobile/models/contact_model.dart';
 import 'package:kyros_app_mobile/models/contacts.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
 import 'package:kyros_app_mobile/widgets/search_bar_widget.dart';
 
 import 'add_contact_screen.dart';
@@ -26,7 +27,9 @@ class _Screen1State extends State<Screen1> {
         display_contacts = [];
         for (Contact contact in contacts) {
           if (contact.name.length >= searchInput.length) {
-            if (contact.name.toLowerCase().contains(searchInput.toLowerCase())) {
+            if (contact.name
+                .toLowerCase()
+                .contains(searchInput.toLowerCase())) {
               display_contacts.add(contact);
             }
           }
@@ -47,9 +50,11 @@ class _Screen1State extends State<Screen1> {
       });
     }
   }
+
   void onGoBack(dynamic value) {
     setState(() {});
   }
+
   void addFavorite(Contact contact) {
     setState(() {
       favoriteContacts.add(contact);
@@ -60,44 +65,41 @@ class _Screen1State extends State<Screen1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Container(
-                height: 35,
-                width: MediaQuery.of(context).size.width * 0.8,
-                padding: EdgeInsets.only(top: 8, left: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  onChanged: (input) {
-                    searchInput = input;
-                    search();
-                  },
-                  decoration: InputDecoration.collapsed(
-                    hintText: 'Search',
-                  ),
+        backgroundColor: StyleConstants.black,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 35,
+              width: MediaQuery.of(context).size.width * 0.7,
+              padding: EdgeInsets.only(top: 8, left: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: TextField(
+                onChanged: (input) {
+                  searchInput = input;
+                  search();
+                },
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Search',
                 ),
               ),
-        Container(
-            height: 35,
-            width: 35,
-            margin: EdgeInsets.only(right: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(100),
             ),
-            child: FlatButton(
+            FlatButton(
               onPressed: () {
-                Route route = MaterialPageRoute(builder: (context) => AddContactScreen());
+                Route route = MaterialPageRoute(
+                    builder: (context) => AddContactScreen());
                 Navigator.push(context, route).then(onGoBack);
               },
               child: Icon(Icons.add),
               color: Colors.white,
               shape: CircleBorder(),
-            ))
-      ])),
+            )
+          ],
+        ),
+      ),
       body: Center(
           child: Column(children: [
         Expanded(
@@ -105,98 +107,103 @@ class _Screen1State extends State<Screen1> {
               itemCount: display_contacts.length,
               itemBuilder: (BuildContext context, int index) {
                 final contact = display_contacts[index];
-                return Slidable(
-                  actionPane: SlidableDrawerActionPane(),
-                  actionExtentRatio: 0.15,
-                  child: Container(
-                    height: 60,
-                    padding:
-                    EdgeInsets.only(top: 20, bottom: 0, left: 0, right: 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          height: 60,
-                          padding: EdgeInsets.only(
-                              left: 75, right: 0, bottom: 0, top: 0),
-                          child: FlatButton(
-                            onPressed: () {
-                              viewDescription(index);
-                            },
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundImage:
-                              AssetImage(contact.Image_URL),
+                return Column(
+                  children: [
+                    Slidable(
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.15,
+                      child: Container(
+                        height: 60,
+                        padding:
+                        EdgeInsets.only(top: 20, bottom: 0, left: 0, right: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 60,
+                              //padding: EdgeInsets.only(left: 75, right: 0, bottom: 0, top: 0),
+                              child: FlatButton(
+                                onPressed: () {
+                                  viewDescription(index);
+                                },
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: AssetImage(contact.Image_URL),
+                                ),
+                                color: Colors.white,
+                                shape: CircleBorder(),
+                              ),
                             ),
-                            color: Colors.white,
-                            shape: CircleBorder(),
-                          ),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              //padding: EdgeInsets.only(right: 50, left: 30),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: 60,
+                                      child: Column(children: [
+                                        Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                            children: [Text(contact.name)]),
+                                        Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                            children: [Text(contact.role)])
+                                      ]),
+                                    ),
+                                    Container(
+                                        alignment: Alignment.centerRight,
+                                        padding: EdgeInsets.only(left: 125),
+                                        child: Row(children: [
+                                          FlatButton(
+                                            onPressed: () {
+                                              ;
+                                            },
+                                            child: Icon(Icons.chat),
+                                            color: Colors.white,
+                                            shape: CircleBorder(),
+                                          ),
+                                        ])),
+                                  ]),
+                              // decoration: BoxDecoration(
+                              //   border: Border(
+                              //     bottom: BorderSide(
+                              //       color: Colors.green,
+                              //       width: 3.0,
+                              //     ),
+                              //   ),
+                              // ),
+                            ),
+                          ],
                         ),
-                        Container(
-                            alignment: Alignment.centerRight,
-                            padding: EdgeInsets.only(right: 50, left: 30),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    height: 60,
-                                    child: Column(children: [
-                                      Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          children: [Text(contact.name)]),
-                                      Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          children: [Text(contact.role)])
-                                    ]),
-                                  ),
-                                  Container(
-                                      alignment: Alignment.centerRight,
-                                      padding: EdgeInsets.only(left: 125),
-                                      child: Row(children: [
-                                        FlatButton(
-                                          onPressed: () {
-                                            ;
-                                          },
-                                          child: Icon(Icons.chat),
-                                          color: Colors.white,
-                                          shape: CircleBorder(),
-                                        ),
-                                      ])),
-                                ]),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.green,
-                                    width: 3.0,
-                                  ),
-                                ))),
+                      ),
+                      secondaryActions: <Widget>[
+                        IconSlideAction(
+                          color: Colors.black45,
+                          icon: Icons.star,
+                          onTap: () {
+                            addFavorite(contact);
+                          },
+                        ),
+                        IconSlideAction(
+                          color: Colors.red,
+                          icon: Icons.delete,
+                          onTap: () {
+                            setState(() {
+                              if (display_contacts.length > 1) {
+                                display_contacts.remove(contact);
+                                contacts.remove(contact);
+                              }
+                            });
+                          },
+                        ),
                       ],
                     ),
-                  ),
-                  secondaryActions: <Widget>[
-                    IconSlideAction(
-                      color: Colors.black45,
-
-                      icon: Icons.star,
-                      onTap: () {
-                        addFavorite(contact);
-
-                      },
-                    ),
-                    IconSlideAction(
-                      color: Colors.red,
-                      icon: Icons.delete,
-                      onTap: () {
-                        setState(() {
-                          if (display_contacts.length > 1) {
-                            display_contacts.remove(contact);
-                            contacts.remove(contact);
-                          }
-                        });
-
-                      },
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Divider(color: StyleConstants.green, thickness: 3.0,),
                     ),
                   ],
                 );
@@ -208,7 +215,7 @@ class _Screen1State extends State<Screen1> {
             maintainState: true,
             visible: showDescription,
             child: Container(
-                height: 200,
+                height: 400,
                 decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
@@ -248,8 +255,9 @@ class _Screen1State extends State<Screen1> {
                                 },
                                 child: CircleAvatar(
                                   radius: 25,
-                                  backgroundImage:
-                                  AssetImage(display_contacts[selectedContact].Image_URL),
+                                  backgroundImage: AssetImage(
+                                      display_contacts[selectedContact]
+                                          .Image_URL),
                                 ),
                                 color: Colors.white,
                                 shape: CircleBorder(),
@@ -281,7 +289,7 @@ class _Screen1State extends State<Screen1> {
                             (display_contacts[selectedContact].description)))
                   ],
                 )))),
-      ])),
+      ],),),
       backgroundColor: Colors.grey[400],
     );
   }

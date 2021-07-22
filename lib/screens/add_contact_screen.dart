@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/contact_model.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
 
 import 'contact_screen.dart';
 
@@ -113,13 +114,13 @@ class _AddContactScreenState extends State<AddContactScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: StyleConstants.black,
           title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-
                 Container(
                   height: 40,
-                  width: 300,
+                  width: 230,
                   alignment: Alignment.center,
                   child: TextField(
                     onChanged: (input) {
@@ -140,24 +141,12 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     ),
                   ),
                 ),
-                Container(
-                    height: 40,
-                    width: 40,
-                    margin: EdgeInsets.only(
-                        right: 55
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: FlatButton(onPressed: () {
-                      ;
-                    },
-                      child: Icon(Icons.add, color: Colors.grey),
-                      color: Colors.white,
-                      shape: CircleBorder(),
-                    )
-
+                FlatButton(onPressed: () {
+                  ;
+                },
+                  child: Icon(Icons.add, color: Colors.grey),
+                  color: Colors.white,
+                  shape: CircleBorder(),
                 )
               ]
           )
@@ -186,12 +175,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             children: [
                               Container(
                                 height: 60,
-                                padding: EdgeInsets.only(
-                                    left: 75,
-                                    right: 0,
-                                    bottom: 0,
-                                    top: 0
-                                ),
+
 
                                 child: FlatButton(
                                   onPressed: () {
