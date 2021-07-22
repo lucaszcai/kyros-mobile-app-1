@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/util/style_constants.dart';
 
 class MessageChat extends StatefulWidget {
-  const MessageChat({Key? key}) : super(key: key);
+  final String imageUrl;
+  const MessageChat({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   _MessageChatState createState() => _MessageChatState();
@@ -51,7 +52,10 @@ class _MessageChatState extends State<MessageChat> {
         backgroundColor: StyleConstants.black,
         title: Row(
           children: [
-            CircleAvatar(),
+            CircleAvatar(
+              backgroundImage:
+              AssetImage(widget.imageUrl),
+            ),
             SizedBox(
               width: 15,
             ),

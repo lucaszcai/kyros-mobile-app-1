@@ -26,7 +26,7 @@ class chats extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MessageChat();
+                    return MessageChat(imageUrl: chat.sender.imageUrl,);
                   }));
                 },
                 child: Container(
