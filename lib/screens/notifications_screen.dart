@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/NotificationScreenListTile.dart';
+import 'package:kyros_app_mobile/util/style_constants.dart';
+import 'package:kyros_app_mobile/widgets/search_bar_widget.dart';
 
 class NotificationsScreen extends StatefulWidget {
   @override
@@ -12,34 +14,72 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: new DefaultTabController(
         length: 2,
         child: new Scaffold(
           appBar: new PreferredSize(
-            preferredSize: Size.fromHeight(kToolbarHeight),
+
+            preferredSize: Size.fromHeight(130.0),
             child: new Container(
-              color: Colors.black,
+
+              color: StyleConstants.black,
               child: new SafeArea(
+
                 child: Column(
+
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     new TabBar(
+
                       tabs: [
-                        new Text("Message Notifications"),
-                        new Text("Assignment Notifications")
+                        new Container(
+                          height: 20.0,
+                          child: new Tab(text: 'Message Notifications'),
+                        ),
+                        new Container(
+                          height: 50.0,
+                          child: new Tab(text: 'Assignment Notifications'),
+                        ),
                       ],
                     ),
+                    Expanded(
+                        child: Container(
+
+                          child: SizedBox(height: 10),
+                        )
+                    ),
+
+
+                    Expanded(
+                        child: Container(
+
+                          child: SearchBar(),
+                        )
+                    ),
+
+                    Expanded(
+                        child: Container(
+
+                          child: SizedBox(height: 10),
+                        )
+                    ),
+
                   ],
                 ),
               ),
             ),
           ),
+
           body: new TabBarView(
+
             children: <Widget>[
+
               new Column(
                 children: <Widget>[
                   Expanded(
                     child: Container(
+
                       child: getListView(),
                     ),
                   ),

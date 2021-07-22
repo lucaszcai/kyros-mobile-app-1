@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   List pages = [
-    chatScreen(),
+    ChatScreen(),
     Screen1(),
     AssignmentsScreen(),
     NotificationsScreen()
