@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/util/style_constants.dart';
+import 'package:kyros_app_mobile/widgets/search_bar_widget.dart';
 
 import 'chats.dart';
 
@@ -25,20 +26,7 @@ class _chatScreenState extends State<chatScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 35,
-                width: MediaQuery.of(context).size.width * 0.8,
-                padding: EdgeInsets.only(top: 8, left: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  decoration: InputDecoration.collapsed(
-                    hintText: 'Search',
-                  ),
-                ),
-              ),
+              SearchBar(),
               Container(
                 height: 35,
                 width: 35,
