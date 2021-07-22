@@ -48,7 +48,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
             Container(
               margin: const EdgeInsets.fromLTRB(30, 0, 30, 30),
               padding: const EdgeInsets.all(15),
-              height: 300,
+              height: 600,
               decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(
@@ -75,7 +75,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
                               builder: (BuildContext context) => new AlertDialog(
                                   content: Container(
                                     width: 300,
-                                    height: 100,
+                                    height: 75,
                                     child: Column(
                                         children: [
                                           TextButton.icon(
