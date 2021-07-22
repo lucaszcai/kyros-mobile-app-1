@@ -29,3 +29,8 @@ List AllKyrosUsers = [
   Contact(name: "jim", role: "manager", description: "hello, how are you doing", Image_URL: 'assets/Wright.jpg'),
   Contact(name: "joey", role: "student", description: "hello, how are you doing", Image_URL: 'assets/Matthews.jpg'),
 ];
+
+
+List favoriteContacts = [];
+
+

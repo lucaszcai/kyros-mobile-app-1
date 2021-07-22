@@ -18,6 +18,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
   bool mutualContact = true;
   String sameContact = '';
   bool save = false;
+  List unsaved_contacts = [];
+  List deleted_contacts = [];
 
   void search() {
     setState(() {
@@ -75,6 +77,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
   void add_contact(int index) {
     if (contacts.contains(display_contacts[index])) {
      setState(() {
+       deleted_contacts.add(display_contacts[index]);
        contacts.remove(display_contacts[index]);
        save = true;
        checkMutualContact(display_contacts[index].name);
@@ -82,11 +85,28 @@ class _AddContactScreenState extends State<AddContactScreen> {
     }
     else {
       setState(() {
+        unsaved_contacts.add(display_contacts[index]);
         contacts.add(display_contacts[index]);
         save = true;
       });
     }
 
+  }
+
+  void clear_new_contacts() {
+    for (Contact contact in unsaved_contacts) {
+      if (contacts.contains(contact)) {
+        setState(() {
+          contacts.remove(contact);
+          unsaved_contacts.remove(contact);
+        });
+      }
+    }
+  }
+  void clear_old_contacts() {
+    for (Contact contact in deleted_contacts) {
+      contacts.add(contact);
+    }
   }
 
   @override
@@ -392,7 +412,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           children: [
                             Container(
                               child: FlatButton(onPressed: () {
-                                ;
+                                clear_new_contacts();
+                                clear_old_contacts();
+                                Navigator.pop(context);
                               },
                                   child:
                                   Text("Clear", style: TextStyle(
