@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/contact_model.dart';
 
+import 'contact_screen.dart';
+
 class AddContactScreen extends StatefulWidget {
   @override
   _AddContactScreenState createState() => _AddContactScreenState();
@@ -10,11 +12,12 @@ class AddContactScreen extends StatefulWidget {
 
 class _AddContactScreenState extends State<AddContactScreen> {
   String searchInput = '';
-  List<Contact> display_contacts = AllKyrosUsers;
+  List display_contacts = AllKyrosUsers;
   bool showDescription = false;
   int selectedContact = 0;
   bool mutualContact = true;
   String sameContact = '';
+  bool save = false;
 
   void search() {
     setState(() {
@@ -67,7 +70,25 @@ class _AddContactScreenState extends State<AddContactScreen> {
       return false;
     }
 
+
 }
+  void add_contact(int index) {
+    if (contacts.contains(display_contacts[index])) {
+     setState(() {
+       contacts.remove(display_contacts[index]);
+       save = true;
+       checkMutualContact(display_contacts[index].name);
+     });
+    }
+    else {
+      setState(() {
+        contacts.add(display_contacts[index]);
+        save = true;
+      });
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +177,11 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                   onPressed: () {
                                     viewDescription(index);
                                   },
-                                  child: Text(''),
+                                  child: CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage:
+                                    AssetImage(contact.Image_URL),
+                                  ),
                                   color: Colors.white,
                                   shape: CircleBorder(),
 
@@ -212,7 +237,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                             child: Row(
                                                 children: [
                                                   FlatButton(onPressed: () {
-                                                    ;
+                                                    add_contact(index);
                                                   },
                                                     child: _buildIcon(contact),
 
@@ -296,7 +321,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                         child: Row(
                                           children: [
                                             Container(
-                                              width: 50,
+
                                               height: 50,
                                               margin: EdgeInsets.only(
                                                   left: 15,
@@ -305,7 +330,11 @@ class _AddContactScreenState extends State<AddContactScreen> {
                                               child: FlatButton(onPressed: () {
                                                 ;
                                               },
-                                                child: Text(''),
+                                                child: CircleAvatar(
+                                                  radius: 25,
+                                                  backgroundImage:
+                                                  AssetImage(display_contacts[selectedContact].Image_URL),
+                                                ),
                                                 color: Colors.white,
                                                 shape: CircleBorder(),
 
@@ -351,6 +380,59 @@ class _AddContactScreenState extends State<AddContactScreen> {
                         )
                     )
                 ),
+                Visibility(
+                    maintainSize: false,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    visible: save,
+                    child: Container(
+                        height: 60,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              child: FlatButton(onPressed: () {
+                                ;
+                              },
+                                  child:
+                                  Text("Clear", style: TextStyle(
+                                    color: Colors.red
+                                  ))
+
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.red),
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                              ),
+                            ),
+                            Container(
+                              child: FlatButton(onPressed: () {
+                                Navigator.pop(context);
+                              },
+                                  child: Text("Save", style: TextStyle(
+                                      color: Colors.green
+                                  ))
+
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.green),
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                              ),
+                            )
+                          ],
+
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          border: Border.all(color: Colors.red),
+                    )
+
+
+                )
+                )
+                
               ]
           )
 
