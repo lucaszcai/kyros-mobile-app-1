@@ -98,13 +98,12 @@ class _HomeworkPageState extends State<HomeworkPage> {
                           setState(() {
                             _pickedImage = returnedImage;
                           });
-
                         },
                         child: Text('Upload Image')
                     ),
                     Center(
                         child: Container(
-                            child: _pickedImage != null ? Image.file(_pickedImage!) : Text('No image uploaded')
+                            child: widget.assignment.homeworkInput != null ? Image.file(widget.assignment.homeworkInput!) : Text('No image uploaded')
                         )
                     ),
                     Spacer(),
@@ -113,7 +112,9 @@ class _HomeworkPageState extends State<HomeworkPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              widget.assignment.homeworkInput = _pickedImage;
+                            },
                             child: Text('  Save  ', style: TextStyle(
                               color: Colors.black,
                             )),
@@ -128,7 +129,15 @@ class _HomeworkPageState extends State<HomeworkPage> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                widget.assignment.completed = true;
+                                widget.assignment.homeworkInput = _pickedImage;
+                                Navigator.pop(context);
+                                assignments.remove(widget.assignment);
+                                assignments.add(widget.assignment);
+                              });
+                            },
                             child: Text('    Submit    ', style: TextStyle(
                                 color: Colors.black
                             )),
