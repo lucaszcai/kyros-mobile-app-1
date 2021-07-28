@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/assignment_model.dart';
-import 'package:kyros_app_mobile/models/assignment_comment_model.dart';
 import 'package:kyros_app_mobile/util/style_constants.dart';
 import 'assignment_screen.dart';
 
@@ -106,7 +105,11 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => AssignmentPage(assignment: assignment))
-                          );
+                          ).then((value) {
+                            setState(() {
+                              // refresh state of assignment screen
+                            });
+                          });
                         },
                         child: Container(
                           padding: EdgeInsets.all(15),

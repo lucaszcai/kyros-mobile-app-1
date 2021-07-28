@@ -8,6 +8,6 @@ class Comment {
       this.name,
       this.description,
       this.date,
-      this.replies
+      this.replies,
       );
 }

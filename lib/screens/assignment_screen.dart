@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'assignments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/assignment_model.dart';
 import 'homework_screen.dart';
@@ -22,6 +21,11 @@ class _AssignmentPageState extends State<AssignmentPage> {
     return '';
   }
 
+  String updateSubmit(bool completed) {
+    if(completed) {return 'Submit Again';}
+    return 'Submit Assignment';
+  }
+
   String newComment = '';
 
   @override
@@ -32,7 +36,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
         child: Column(
             children: [
               Container(
-                  margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.00),
+                  margin: EdgeInsets.fromLTRB(15,20,15,5),
                   child: Row(children: [
                     TextButton.icon(
                         onPressed: () {
@@ -57,14 +61,22 @@ class _AssignmentPageState extends State<AssignmentPage> {
                     ),
                     TextButton(
                       onPressed: () {
+                        if (widget.assignment.completed) {
+                          widget.assignment.homeworkInput=null;
+                        }
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
                                   HomeworkPage(assignment: widget.assignment)),
-                        );
+                        ).then((value) {
+                          setState(() {
+                            // refresh state of assignment screen
+                          });
+                        });
                       },
-                      child: Text('Submit Assignment',
+                      child: Text(
+                        updateSubmit(widget.assignment.completed),
                           style: TextStyle(color: Colors.black)),
                       style: ButtonStyle(
                           backgroundColor:
@@ -218,8 +230,10 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                       child: Row(children: [
                                         Icon(CupertinoIcons.plus_circle,
                                             color: Colors.black),
-                                        Text('reply', style: TextStyle(color: Colors.black)),
-                                      ]))
+                                        Text(' reply', style: TextStyle(color: Colors.black)),
+                                      ]
+                                      )
+                                  )
                                 ]),
                                 Text('Due: ${widget.assignment.dueDate.month}/${widget.assignment.dueDate.day}/${widget.assignment.dueDate.year}')
                               ])
@@ -237,7 +251,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                           final Comment comment = widget.assignment.comments[index];
                           return Container(
                             // margin: EdgeInsets.fromLTRB(45, 0, 45, 15),
-                            padding: EdgeInsets.all(15),
+                            padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(color: Color(0xFF5C6170))),
@@ -260,11 +274,116 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                   ),
                                   SizedBox(height: 5),
                                   Text(comment.description),
-                                  SizedBox(height: 5),
-                                  Text('${comment.replies} replies',
-                                      style: TextStyle(
-                                          fontSize: 12.0, color: Color(0xFF152332)))
-                                ]),
+                                  Row(
+                                    children: [
+                                      Text('${comment.replies} replies',
+                                        style: TextStyle(
+                                            fontSize: 12.0, color: Color(0xFF152332))
+                                      ),
+                                      TextButton(
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) =>
+                                              new AlertDialog(
+                                                backgroundColor: Color(0xFF393C46),
+                                                content: Container(
+                                                  height: 250,
+                                                  width: 400,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(8.0),
+                                                    child: Center(
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          // IconButton(
+                                                          //   onPressed: () {
+                                                          //     Navigator.of(context).pop();
+                                                          //   },
+                                                          //   icon: Icon(
+                                                          //       CupertinoIcons.xmark_circle,
+                                                          //       color: Colors.white),
+                                                          // ),
+                                                          Expanded(
+                                                            child: Container(
+                                                              //height: 230,
+                                                              // width: 100,
+                                                              padding: EdgeInsets.all(15.0),
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.white,
+                                                              ),
+                                                              child: Column(
+                                                                mainAxisSize: MainAxisSize.min,
+                                                                children: [
+                                                                  TextField(
+                                                                    keyboardType: TextInputType.multiline,
+                                                                    maxLines: 5,
+                                                                    maxLength: 250,
+                                                                    onChanged: (input) {
+                                                                      setState(() {
+                                                                        newComment = input;
+                                                                      });
+                                                                    },
+                                                                    decoration:
+                                                                    new InputDecoration(
+                                                                      hintText: 'Add a comment...',
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    child: Row(
+                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                      children: [
+                                                                        Text(
+                                                                          '250 character limit',
+                                                                          style: TextStyle(fontSize: 15.0),
+                                                                        ),
+                                                                        Transform.rotate(
+                                                                          angle:
+                                                                          math.pi / 4.0,
+                                                                          child: IconButton(
+                                                                            onPressed: () {
+                                                                              setState(() {
+                                                                                widget.assignment.addComment(new Comment('username', newComment, DateTime.now(), 0));
+                                                                              });
+                                                                              Navigator.of(context).pop();
+                                                                            },
+                                                                            icon: Icon(
+                                                                              CupertinoIcons.paperplane_fill,
+                                                                              color: Color(0xFFF78154),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Row(children: [
+                                            Icon(CupertinoIcons.plus_circle,
+                                                color: Colors.black,
+                                              size: 15.0,
+                                            ),
+                                            Text(' reply', style: TextStyle(color: Colors.black, fontSize: 12.0)),
+                                          ]
+                                          )
+                                      )
+                                    ],
+                                  ),
+                                ]
+                          ),
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {

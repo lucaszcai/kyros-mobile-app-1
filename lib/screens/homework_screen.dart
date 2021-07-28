@@ -34,7 +34,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                margin: EdgeInsets.fromLTRB(30, 10, 0, 10),
+                margin: EdgeInsets.fromLTRB(15, 20, 15, 5),
                 child: TextButton.icon(
                     onPressed: () {
                       Navigator.pop(context);
@@ -97,6 +97,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
                           File returnedImage = await pickImage(returnedSource);
                           setState(() {
                             _pickedImage = returnedImage;
+                            widget.assignment.homeworkInput = _pickedImage;
                           });
                         },
                         child: Text('Upload Image')
@@ -114,6 +115,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
                           TextButton(
                             onPressed: () {
                               widget.assignment.homeworkInput = _pickedImage;
+                              Navigator.pop(context);
                             },
                             child: Text('  Save  ', style: TextStyle(
                               color: Colors.black,
