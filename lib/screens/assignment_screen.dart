@@ -61,9 +61,6 @@ class _AssignmentPageState extends State<AssignmentPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        if (widget.assignment.completed) {
-                          widget.assignment.homeworkInput=null;
-                        }
                         Navigator.push(
                           context,
                           MaterialPageRoute(
