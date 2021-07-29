@@ -11,7 +11,7 @@ class NotificationScreenListTile extends StatelessWidget {
   final Widget title;
   final Widget description;
 
-  // build a custom ExpansionTile
+  // build a custom Widget
   @override
   Widget build(BuildContext context) {
     return Slidable(
