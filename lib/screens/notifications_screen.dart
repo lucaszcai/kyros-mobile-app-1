@@ -8,8 +8,6 @@ class NotificationsScreen extends StatefulWidget {
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
-// comment to test edit perms, remove later
-
 class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
@@ -100,49 +98,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       ),
     );
   }
-// Widget build(BuildContext context) {
-//   return Scaffold(
-//     body: Center(
-//       // A column of Widgets that make up the app
-//         child: Column(
-//           children: [
-//             // Two buttons "Message Notifications" "Assignment Notifications"
-//             Container(
-//               height: 60,
-//               child: Row(
-//                 children: [
-//                   // Message notis button
-//                   Expanded(
-//                     child: TextButton(
-//                         onPressed: () {print('msgnoti pressed');},
-//
-//                         child: Text('Message Notifications')),
-//
-//
-//                   ),
-//                   Container(
-//                     color: Colors.grey,
-//                     width: 2.0,
-//                   ),
-//                   // Assignment notis button
-//                   Expanded(
-//                     child: TextButton(
-//                         onPressed: () {print('asnmtnoti pressed');},
-//                         child: Text('Assignment Notifications')),
-//                   )
-//                 ],
-//               ),
-//             ),
-//
-//             Flexible(
-//                 child: getListView()
-//             ),
-//
-//           ],
-//         )
-//     ),
-//   );
-// }
+
 }
 
 // Creates a list of data for notifications
@@ -150,7 +106,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 // TODO: this is a placeholder, replace with something that gets the actual info for notifications
 List<List> getListElements() {
   var items = List<List>.generate(
-      1000, (counter) => ["Notification $counter", "description $counter"]);
+      1000, (counter) => ["Notification $counter", "$counter Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam euismod, elit in laoreet gravida, lacus massa laoreet orci, a vulputate libero turpis et metus. Nulla sodales est luctus tortor ullamcorper, ac pharetra est pretium. Mauris id enim id ligula dictum sodales. Cras sit."]);
   return items;
 }
 
@@ -166,8 +122,8 @@ Widget getListView() {
       // padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
       itemBuilder: (context, index) {
         return NotificationScreenListTile(
-          title: listItems[index][0],
-          description: listItems[index][1],
+          title: Text(listItems[index][0]),
+          description: Text(listItems[index][1]),
         );
       });
 

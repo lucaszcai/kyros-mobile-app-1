@@ -8,8 +8,8 @@ class NotificationScreenListTile extends StatelessWidget {
   // require title and description parameters
   NotificationScreenListTile({required this.title, required this.description});
 
-  final String title;
-  final String description;
+  final Widget title;
+  final Widget description;
 
   // build a custom ExpansionTile
   @override
@@ -25,14 +25,13 @@ class NotificationScreenListTile extends StatelessWidget {
             child: Text('Pic'),
             foregroundColor: Colors.white,
           ),
-          title: Text('Notification'),
-          subtitle: Text('Caption'),
+          title: title,
+          subtitle: description,
         ),
       ),
       secondaryActions: <Widget>[
         IconSlideAction(
           color: Colors.black45,
-          
           icon: Icons.star,
         ),
         IconSlideAction(
