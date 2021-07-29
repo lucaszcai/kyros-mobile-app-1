@@ -26,7 +26,9 @@ class chats extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MessageChat(imageUrl: chat.sender.imageUrl,);
+                    return MessageChat(
+                      imageUrl: chat.sender.imageUrl,
+                    );
                   }));
                 },
                 child: Container(
@@ -39,7 +41,7 @@ class chats extends StatelessWidget {
                     actionPane: SlidableScrollActionPane(),
                     actionExtentRatio: 1 / 8,
                     child: Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.all(5),
                       child: Row(
                         children: [
                           Stack(
@@ -86,9 +88,13 @@ class chats extends StatelessWidget {
                       ),
                     ),
                     secondaryActions: <Widget>[
-                      IconSlideAction(
-                        color: Colors.black45,
-                        icon: Icons.star,
+                      ClipRRect(
+                        borderRadius:
+                            BorderRadius.horizontal(left: Radius.circular(20)),
+                        child: IconSlideAction(
+                          color: Colors.black54,
+                          icon: Icons.star,
+                        ),
                       ),
                       IconSlideAction(
                         color: Colors.red,
