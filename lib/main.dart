@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/screens/ChatScreen.dart';
 import 'package:kyros_app_mobile/screens/contact_screen.dart';
@@ -5,7 +6,9 @@ import 'package:kyros_app_mobile/screens/assignments_screen.dart';
 import 'package:kyros_app_mobile/screens/notifications_screen.dart';
 import 'package:kyros_app_mobile/util/style_constants.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
