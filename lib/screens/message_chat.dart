@@ -85,8 +85,8 @@ class _MessageChatState extends State<MessageChat> {
                   return MessageWidget(
                     message: () { print("index: $index"); return messages[index]; } (),
                     newTimePeriod: newTP,
-                    newCluster: newTP
-                      || messages[index].authorID != messages[index - 1].authorID
+                    newCluster: newTP || messages[index].authorID != messages[index - 1].authorID,
+                    lastMessage: index == messages.length - 1 || messages[index + 1].authorID != messages[index].authorID
                     );
                  } ()
               ),
@@ -170,13 +170,15 @@ class MessageWidget extends StatelessWidget {
         Key? key,
         required this.message,
         required this.newTimePeriod,
-        required this.newCluster
+        required this.newCluster,
+        required this.lastMessage
       }
     ) : super(key: key);
 
   final Message message;
   final bool newTimePeriod;
   final bool newCluster;
+  final bool lastMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +196,7 @@ class MessageWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (!message.bySelf) ...[
-                if (newCluster)
+                if (lastMessage)
                   CircleAvatar(
                     radius: 15,
                   )
