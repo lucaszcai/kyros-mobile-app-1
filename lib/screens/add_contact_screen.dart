@@ -54,7 +54,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
   }
 
   bool checkMutualContact(String index) {
-    for (Contact contact in contacts) {
+    for (Contact contact in current_user_contacts) {
       if (index.contains(contact.name)) {
         sameContact = contact.name;
       } else {
@@ -69,17 +69,18 @@ class _AddContactScreenState extends State<AddContactScreen> {
   }
 
   void add_contact(int index) {
-    if (contacts.contains(display_contacts[index])) {
+
+    if (current_user_contacts.contains(display_contacts[index])) {
       setState(() {
         deleted_contacts.add(display_contacts[index]);
-        contacts.remove(display_contacts[index]);
+        current_user_contacts.remove(display_contacts[index]);
         save = true;
         checkMutualContact(display_contacts[index].name);
       });
     } else {
       setState(() {
         unsaved_contacts.add(display_contacts[index]);
-        contacts.add(display_contacts[index]);
+        current_user_contacts.add(display_contacts[index]);
         save = true;
       });
     }
@@ -87,9 +88,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
   void clear_new_contacts() {
     for (Contact contact in unsaved_contacts) {
-      if (contacts.contains(contact)) {
+      if (current_user_contacts.contains(contact)) {
         setState(() {
-          contacts.remove(contact);
+          current_user_contacts.remove(contact);
           unsaved_contacts.remove(contact);
         });
       }
@@ -98,7 +99,10 @@ class _AddContactScreenState extends State<AddContactScreen> {
 
   void clear_old_contacts() {
     for (Contact contact in deleted_contacts) {
-      contacts.add(contact);
+      setState(() {
+        current_user_contacts.add(contact);
+        deleted_contacts.remove(contact);
+      });
     }
   }
 

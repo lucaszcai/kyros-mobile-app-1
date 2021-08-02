@@ -1,3 +1,6 @@
+import 'package:kyros_app_mobile/models/message.dart';
+import 'package:kyros_app_mobile/models/user.dart';
+
 class Contact {
   String name;
   String role;
@@ -10,27 +13,31 @@ class Contact {
     required this.description,
     required this.Image_URL,
 
+
   });
 }
 
-List contacts = [
-  Contact(name: "jeff", role: "manager", description: "hello, how are you doing", Image_URL: 'assets/Me.jpg'),
-
-
+List base_contacts = [
+  me.contact,
+  steeves.contact,
+  stone.contact,
+  andrews.contact,
 
 ];
 
 List AllKyrosUsers = [
-  Contact(name: "jeff", role: "manager", description: "hello, how are you doing", Image_URL: 'assets/Me.jpg'),
-  Contact(name: "joe", role: "student", description: "hello, how are you doing", Image_URL: 'assets/Steeves.jpg'),
-  Contact(name: "nellie", role: "manager", description: "hello, how are you doing", Image_URL: 'assets/Stone.jpg'),
-  Contact(name: "bob", role: "student", description: "hello, how are you doing", Image_URL: 'assets/Andrews.jpg'),
-  Contact(name: "daren", role: "student", description: "hello, how are you doing", Image_URL: 'assets/Owens.jpg'),
-  Contact(name: "jim", role: "manager", description: "hello, how are you doing", Image_URL: 'assets/Wright.jpg'),
-  Contact(name: "joey", role: "student", description: "hello, how are you doing", Image_URL: 'assets/Matthews.jpg'),
+  me.contact,
+  steeves.contact,
+  stone.contact,
+  andrews.contact,
+  owens.contact,
+  wright.contact,
+  matthews.contact
 ];
 
 
 List favoriteContacts = [];
+
+List current_user_contacts = me.contacts;
 
 
