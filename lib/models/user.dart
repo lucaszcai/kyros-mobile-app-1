@@ -1,13 +1,15 @@
 import 'contact_model.dart';
 
-class User {
+class KyrosUser {
   final int id;
+  final String uid;
   final String name;
   final String imageUrl;
   Contact contact;
   List contacts;
 
-  User({
+  KyrosUser({
+    required this.uid,
     required this.id,
     required this.name,
     required this.imageUrl,

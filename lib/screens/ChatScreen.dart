@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kyros_app_mobile/services/auth_service.dart';
 import 'package:kyros_app_mobile/util/style_constants.dart';
 import 'package:kyros_app_mobile/widgets/search_bar_widget.dart';
 
 import 'chats.dart';
+import 'login_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -20,6 +22,15 @@ class _ChatScreenState extends State<ChatScreen> {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: (){
+            AuthService().signOut().then((s) {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            });
+          },
+        ),
         backgroundColor: StyleConstants.grey,
         body: DefaultTabController(
           length: 2,
