@@ -32,8 +32,8 @@ class _MessageChatState extends State<MessageChat> {
 
     if (content == "") return;
 
-    Message newMessage = Message(0, "name", content, bySelf: false);  // Message object is temp
-    // Message newMessage = Message(1, "name", content, bySelf: true);  // Message object is temp
+    Message newMessage = Message(2, "name", content, bySelf: false);  // Message object is temp
+    // Message newMessage = Message(0, "name", content, bySelf: true);  // Message object is temp
 
     messages.add(newMessage);
 
@@ -83,12 +83,17 @@ class _MessageChatState extends State<MessageChat> {
                           .difference(messages[index - 1].time)
                           .inSeconds > 30;
                   return MessageWidget(
-                    message: () { print("index: $index"); return messages[index]; } (),
+                    message: messages[index],
                     newTimePeriod: newTP,
-                    newCluster: newTP || messages[index].authorID != messages[index - 1].authorID,
-                    lastMessage: index == messages.length - 1 || messages[index + 1].authorID != messages[index].authorID
-                    );
-                 } ()
+                    newCluster: newTP
+                      || messages[index].authorID != messages[index - 1].authorID,
+                    lastOfCluster: index == messages.length - 1
+                        || messages[index + 1].time
+                            .difference(messages[index].time)
+                            .inSeconds > 30
+                        || messages[index].authorID != messages[index + 1].authorID,
+                  );
+                } ()
               ),
             ),
           ),
@@ -171,22 +176,21 @@ class MessageWidget extends StatelessWidget {
         required this.message,
         required this.newTimePeriod,
         required this.newCluster,
-        required this.lastMessage
+        required this.lastOfCluster,
       }
     ) : super(key: key);
 
   final Message message;
   final bool newTimePeriod;
   final bool newCluster;
-  final bool lastMessage;
+  final bool lastOfCluster;
 
   @override
   Widget build(BuildContext context) {
-    print(newCluster);
     return Column(
       children: [
         if (newTimePeriod) Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: EdgeInsets.only(top: 25),
           child: Text(message.time.toString()),
         ),
         Container(
@@ -196,17 +200,17 @@ class MessageWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (!message.bySelf) ...[
-                if (lastMessage)
+                if (lastOfCluster)
                   CircleAvatar(
                     radius: 15,
                   )
                 else
                   SizedBox(width: 30),
-                SizedBox(width: 10),
+                SizedBox(width: 15),
               ]
               else
                 Expanded(child: Container()),
-              SizedBox(width: 10),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -239,8 +243,8 @@ class MessageWidget extends StatelessWidget {
               ),
 
               if (message.bySelf) ...[
-                SizedBox(width: 10),
-                if (newCluster)
+                SizedBox(width: 15),
+                if (lastOfCluster)
                   CircleAvatar(
                     radius: 15,
                   )

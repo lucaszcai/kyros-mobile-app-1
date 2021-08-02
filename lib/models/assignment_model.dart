@@ -25,7 +25,7 @@ class Assignment {
 }
 
 List<Assignment> assignments = [
-  Assignment('Assignment title #1', 'lorem lorem lorem', DateTime.utc(2021, 1, 1), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
+  Assignment('Assignment title #1', 'lorem lorem lorem', DateTime.utc(2021, 1, 1), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0)], null, false),
   Assignment('Assignment title #2', 'lorem lorem lorem', DateTime.utc(2021, 1, 2), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
   Assignment('Assignment title #3', 'lorem lorem lorem', DateTime.utc(2021, 1, 3), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
   Assignment('Assignment title #4', 'lorem lorem lorem', DateTime.utc(2021, 1, 4), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),

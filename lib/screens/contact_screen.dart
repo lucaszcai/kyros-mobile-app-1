@@ -15,17 +15,17 @@ class Screen1 extends StatefulWidget {
 
 class _Screen1State extends State<Screen1> {
   String searchInput = '';
-  List display_contacts = contacts;
+  List display_contacts = current_user_contacts;
   bool showDescription = false;
   int selectedContact = 0;
 
   void search() {
     setState(() {
       if (searchInput == '') {
-        display_contacts = contacts;
+        display_contacts = current_user_contacts;
       } else {
         display_contacts = [];
-        for (Contact contact in contacts) {
+        for (Contact contact in current_user_contacts) {
           if (contact.name.length >= searchInput.length) {
             if (contact.name
                 .toLowerCase()
@@ -159,7 +159,7 @@ class _Screen1State extends State<Screen1> {
                                         child: Row(children: [
                                           FlatButton(
                                             onPressed: () {
-                                              ;
+
                                             },
                                             child: Icon(Icons.chat),
                                             color: Colors.white,
@@ -194,7 +194,7 @@ class _Screen1State extends State<Screen1> {
                             setState(() {
                               if (display_contacts.length > 1) {
                                 display_contacts.remove(contact);
-                                contacts.remove(contact);
+                                current_user_contacts.remove(contact);
                               }
                             });
                           },

@@ -21,73 +21,93 @@ class _ChatScreenState extends State<ChatScreen> {
       },
       child: Scaffold(
         backgroundColor: StyleConstants.grey,
-        appBar: AppBar(
-          backgroundColor: StyleConstants.black,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SearchBar(),
-              Container(
-                height: 35,
-                width: 35,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    print('pressed');
-                  },
-                  child: Icon(
-                    Icons.add,
-                    color: StyleConstants.black,
+        body: DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(40),
+              child: Container(
+                color: StyleConstants.black,
+                child: SafeArea(
+                  child: Container(
+                    child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: Colors.orange,
+                      tabs: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          child: Tab(
+                            text: 'Direct Message',
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.35,
+                          child: Tab(
+                            text: 'Group Messages',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-        body: new DefaultTabController(
-          length: 2,
-          child: new Scaffold(
-            appBar: new PreferredSize(
-              preferredSize: Size.fromHeight(30),
-              child: new Container(
-                color: StyleConstants.black,
-                child: new SafeArea(
-                    child: new TabBar(
-                        tabs: [
-                          new Container(
-                            child: new Tab(text: 'Direct Messages'),
+            ),
+            body: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SearchBar(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            ;
+                          },
+                          child: Icon(
+                            Icons.add,
+                            color: StyleConstants.green,
                           ),
-                          new Container(
-                            child: new Tab(text: 'Group Messages'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: TabBarView(
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              child: chats(),
+                            ),
                           ),
                         ],
                       ),
+                      Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              child: chats(),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-              ),
-            ),
-            body: new TabBarView(
-              children: <Widget>[
-                new Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        child: chats(),
-                      ),
-                    ),
-                  ],
                 ),
-                new Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        child: chats(),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),

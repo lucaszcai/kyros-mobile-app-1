@@ -8,6 +8,7 @@ class SearchBar extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       padding: EdgeInsets.only(top: 8, left: 10),
       decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
