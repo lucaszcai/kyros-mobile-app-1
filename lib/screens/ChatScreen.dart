@@ -84,7 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            ;
+
                           },
                           child: Icon(
                             Icons.add,

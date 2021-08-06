@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kyros_app_mobile/services/auth_service.dart';
+import 'package:kyros_app_mobile/services/database_service.dart';
 import 'package:kyros_app_mobile/util/style_constants.dart';
 
 class MessageChat extends StatefulWidget {
   final String imageUrl;
-  const MessageChat({Key? key, required this.imageUrl}) : super(key: key);
+  final String name;
+  final String id;
+  const MessageChat({Key? key, required this.imageUrl, required this.name, required this.id}) : super(key: key);
 
   @override
   _MessageChatState createState() => _MessageChatState();
@@ -26,27 +31,35 @@ class _MessageChatState extends State<MessageChat> {
     }
   }
 
-  sendMessage(String content) {
-    print("Message input submitted: $content");
-    print("messages type: ${messages.runtimeType}");
+  sendMessage() async {
+    CollectionReference messages = FirebaseFirestore.instance.collection('chatrooms/${widget.id}/messages');
+    if(messageInputController.text != ""){
+      String message = messageInputController.text;
+      var lastMessageTime = DateTime.now();
 
-    if (content == "") return;
+      DocumentSnapshot userInfo = await DatabaseService().getUserById(AuthService().getCurrentID());
+      print(userInfo['username']);
 
-    Message newMessage = Message(2, "name", content, bySelf: false);  // Message object is temp
-    // Message newMessage = Message(0, "name", content, bySelf: true);  // Message object is temp
+      Map<String, dynamic> messageInfo = {
+        'content': message,
+        'sender': AuthService().getCurrentID(),
+        'timestamp': lastMessageTime,
+        'username': userInfo['username']
+      };
 
-    messages.add(newMessage);
 
-    setState(() {
-      messageInputController.clear();
-      displayMessage(newMessage);
-    });
+      messages.add(messageInfo);
 
-    return; // stub
+      messageInputController.text = '';
+
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference messages = FirebaseFirestore.instance.collection('chatrooms/${widget.id}/messages');
+    print(messages);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: StyleConstants.black,
@@ -62,7 +75,7 @@ class _MessageChatState extends State<MessageChat> {
             Column(
                 children: [
                   Text(
-                    "Chat Name",
+                    widget.name,
                   ),
                 ]
             )
@@ -72,31 +85,28 @@ class _MessageChatState extends State<MessageChat> {
       backgroundColor: Color(0xFFE9E9E9),
       body: Column(
         children: [
-          Expanded(
-            child: Container(
-              child: ListView.builder(
-                padding: EdgeInsets.only(top: 30, bottom: 20),
-                itemCount: messages.length,
-                itemBuilder: (context, index) => () {
-                  var newTP = index == 0
-                      || messages[index].time
-                          .difference(messages[index - 1].time)
-                          .inSeconds > 30;
-                  return MessageWidget(
-                    message: messages[index],
-                    newTimePeriod: newTP,
-                    newCluster: newTP
-                      || messages[index].authorID != messages[index - 1].authorID,
-                    lastOfCluster: index == messages.length - 1
-                        || messages[index + 1].time
-                            .difference(messages[index].time)
-                            .inSeconds > 30
-                        || messages[index].authorID != messages[index + 1].authorID,
-                  );
-                } ()
-              ),
+          Expanded(child: Container(
+            child: StreamBuilder(
+              stream: messages.orderBy('timestamp', descending: true).snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                // print(snapshot);
+                print(snapshot.data!.docs.length);
+                return snapshot.hasData
+                    ? ListView.builder(
+                    padding: EdgeInsets.only(bottom: 70, top: 16),
+                    itemCount: snapshot.data!.docs.length,
+                    reverse: true,
+                    itemBuilder: (context, index) {
+                      print(snapshot.data!.docs[index]);
+                      DocumentSnapshot msg = snapshot.data!.docs[index];
+                      // DocumentSnapshot userInfo =  DatabaseService().getUserById(msg['sender']);
+                      // return messageTile(msg['content'], msg['dateTime'], msg['sender']! == AuthService().getCurrentID(),);
+                      return messageTile(msg['content'], msg['timestamp'], msg['sender']! == AuthService().getCurrentID(), msg['username']);
+                    },)
+                    : Center(child: CircularProgressIndicator());
+              },
             ),
-          ),
+          ),),
           Container(
             color: StyleConstants.black,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -135,11 +145,14 @@ class _MessageChatState extends State<MessageChat> {
                       ),
                     ),
                     child: Icon(
-                      Icons.ac_unit, // temp
+                      // Icons.ac_unit, // temp
+                      Icons.send,
                       color: Color(0xFF000000),
-                      size: 30,
+                      size: 25,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      sendMessage();
+                    },
                   ),
                 ),
                 SizedBox(width: 12),
@@ -156,7 +169,10 @@ class _MessageChatState extends State<MessageChat> {
                         filled: true,
                         labelText: "...",
                       ),
-                      onSubmitted: sendMessage,
+
+                      // onSubmitted: () async{
+                      //   sendMessage();
+                      // },
                     ),
                   ),
                 ),
@@ -167,6 +183,68 @@ class _MessageChatState extends State<MessageChat> {
       ),
     );
   }
+}
+
+Widget messageTile(String content, Timestamp timestamp, bool bySelf, String name){
+  DateTime date = DateTime.parse(timestamp.toDate().toString());
+  return Column(
+    children: [
+      // if (newTimePeriod) Container(
+      //   margin: EdgeInsets.only(top: 25),
+      //   child: Text(dateTime.toString()),
+      // ),
+      Container(
+        margin: EdgeInsets.only(left: 15, top: 0, right: 15, ),
+        child: Row(
+          mainAxisAlignment: bySelf ? MainAxisAlignment.end : MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            CircleAvatar(
+              radius: 15,
+            ),
+            // if (!bySelf) ...[
+            //   if (lastOfCluster)
+            //
+            //   else
+            //     SizedBox(width: 30),
+            //   SizedBox(width: 15),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (!bySelf) ...[
+                  Container(
+                    margin: EdgeInsets.only(top: 10),
+                    child: Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ],
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xFFFFFFFF),
+                  ),
+                  margin: EdgeInsets.only(top: 3),
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 7),
+                  child: Text(
+                    content,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+          ],
+        ),
+      ),
+    ],
+  );
 }
 
 class MessageWidget extends StatelessWidget {
