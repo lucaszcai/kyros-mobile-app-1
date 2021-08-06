@@ -97,14 +97,14 @@ class _HomeworkPageState extends State<HomeworkPage> {
                           File returnedImage = await pickImage(returnedSource);
                           setState(() {
                             _pickedImage = returnedImage;
-                            widget.assignment.homeworkInput = _pickedImage;
+                            // widget.assignment.homeworkInput = _pickedImage;
                           });
                         },
                         child: Text('Upload Image')
                     ),
                     Center(
                         child: Container(
-                            child: widget.assignment.homeworkInput != null ? Image.file(widget.assignment.homeworkInput!) : Text('No image uploaded')
+                            // child: widget.assignment.homeworkInput != null ? Image.file(widget.assignment.homeworkInput!) : Text('No image uploaded')
                         )
                     ),
                     Spacer(),
@@ -114,7 +114,7 @@ class _HomeworkPageState extends State<HomeworkPage> {
                         children: [
                           TextButton(
                             onPressed: () {
-                              widget.assignment.homeworkInput = _pickedImage;
+                              // widget.assignment.homeworkInput = _pickedImage;
                               Navigator.pop(context);
                             },
                             child: Text('  Save  ', style: TextStyle(
@@ -134,10 +134,10 @@ class _HomeworkPageState extends State<HomeworkPage> {
                             onPressed: () {
                               setState(() {
                                 widget.assignment.completed = true;
-                                widget.assignment.homeworkInput = _pickedImage;
+                                // widget.assignment.homeworkInput = _pickedImage;
                                 Navigator.pop(context);
-                                assignments.remove(widget.assignment);
-                                assignments.add(widget.assignment);
+                                // assignments.remove(widget.assignment);
+                                // assignments.add(widget.assignment);
                               });
                             },
                             child: Text('    Submit    ', style: TextStyle(

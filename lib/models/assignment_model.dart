@@ -1,37 +1,63 @@
-import 'assignment_comment_model.dart';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Assignment {
-  final String title;
-  final String description;
-  final DateTime dueDate;
-  final List<Comment> comments;
-  File? homeworkInput;
+  String title;
+  String description;
+  DateTime dueDate;
+
+  // List<Comment> comments;
+  // File? homeworkInput;
   bool completed;
 
   Assignment(
-      this.title,
-      this.description,
-      this.dueDate,
-      this.comments,
-      this.homeworkInput,
-      this.completed
-  );
+      {required this.title,
+        required this.description,
+        required this.dueDate,
+        // required this.comments,
+        // this.homeworkInput,
+        required this.completed});
 
-  void addComment(Comment comment) {
-    this.comments.add(comment);
+  factory Assignment.fromJson(Map<String, dynamic> json){
+    // List<dynamic> commentMaps = json['comments'];
+    //
+    // List<Comment> convertedComments;
+    // if(commentMaps != null){
+    //   convertedComments = <Comment>[];
+    //   commentMaps.forEach((comment){
+    //     convertedComments.add(Comment.fromJson(comment));
+    //   });
+    // }
+
+    return Assignment(
+      title: json['title'],
+      description: json['description'],
+      dueDate: json['dateTime'],
+      // comments: doc.get('comments'),
+      // comments: convertedComments,
+      completed: json['completed'],
+    );
   }
 
-}
+  Map<String, dynamic> toMap(){
+    return{
+      'title': title,
+      'description': description,
+      'dueDate': dueDate,
+      // 'comments': comments,
+      'completed': completed
+    };
+  }
 
-List<Assignment> assignments = [
-  Assignment('Assignment title #1', 'lorem lorem lorem', DateTime.utc(2021, 1, 1), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0)], null, false),
-  Assignment('Assignment title #2', 'lorem lorem lorem', DateTime.utc(2021, 1, 2), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
-  Assignment('Assignment title #3', 'lorem lorem lorem', DateTime.utc(2021, 1, 3), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
-  Assignment('Assignment title #4', 'lorem lorem lorem', DateTime.utc(2021, 1, 4), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
-  Assignment('Assignment title #5', 'lorem lorem lorem', DateTime.utc(2021, 1, 5), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
-  Assignment('Assignment title #6', 'lorem lorem lorem', DateTime.utc(2021, 1, 6), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, false),
-  Assignment('Assignment title #7', 'lorem lorem lorem', DateTime.utc(2021, 1, 7), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, true),
-  Assignment('Assignment title #8', 'lorem lorem lorem', DateTime.utc(2021, 1, 8), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, true),
-  Assignment('Assignment title #9', 'lorem lorem lorem', DateTime.utc(2021, 1, 9), [Comment('username','lorem lorem lorem lorem', DateTime.utc(2021, 1, 1), 0),], null, true),
-];
+  factory Assignment.fromDocument(DocumentSnapshot doc) {
+    return Assignment(
+      title: doc.get('title'),
+      description: doc.get('description'),
+      dueDate: DateTime.now(),
+      // comments: doc.get('comments'),
+      completed: doc.get('completed'),
+      // comments: doc.collection('comments')
+    );
+  }
+}

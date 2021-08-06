@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kyros_app_mobile/models/assignment_model.dart';
@@ -9,34 +10,85 @@ class AssignmentsScreen extends StatefulWidget {
 }
 
 class _AssignmentsScreenState extends State<AssignmentsScreen> {
-
-  List<Assignment> searched = assignments;
-  String searchInput = '';
-
-  void search() {
-    setState(() {
-      if (searchInput == '') {
-        searched = assignments;
-      } else {
-        searched = [];
-        for (Assignment assignment in assignments) {
-          if (assignment.title.length >= searchInput.length) {
-            if (assignment.title.toLowerCase().contains(searchInput.toLowerCase())) {
-              searched.add(assignment);
-            }
-          }
-        }
-      }
-    });
-  }
+  //
+  // List<Assignment> searched = assignments;
+  // String searchInput = '';
+  //
+  // void search() {
+  //   setState(() {
+  //     if (searchInput == '') {
+  //       searched = assignments;
+  //     } else {
+  //       searched = [];
+  //       for (Assignment assignment in assignments) {
+  //         if (assignment.title.length >= searchInput.length) {
+  //           if (assignment.title.toLowerCase().contains(searchInput.toLowerCase())) {
+  //             searched.add(assignment);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
 
   String updateCompletion(bool completed) {
     if (completed) return 'completed';
     return '';
   }
 
+  Widget assignmentWidget(Assignment assignment, String assignmentId) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white, border: Border.all(color: Color(0xFF5C6170))),
+      child: TextButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AssignmentPage(
+                      assignment: assignment,
+                      assignmentId: assignmentId,
+                    )));
+          },
+          child: Container(
+              padding: EdgeInsets.all(15),
+              child: Column(children: [
+                Row(children: [
+                  Container(
+                      width: 215,
+                      child: Text(assignment.title,
+                          style: TextStyle(
+                              fontSize: 23.0, color: Color(0xFF152332)))),
+                  // Text(updateCompletion(assignment.completed), style: TextStyle(
+                  //   color: Color(0xFFF78154),
+                  //   fontSize: 14.0,
+                  //   fontStyle: FontStyle.italic,
+                  // ),),
+                ]),
+                SizedBox(height: 15),
+                Row(children: [
+                  // Text(
+                  //     "${assignment.comments.length} comments",
+                  //     style: TextStyle (
+                  //         color: Color(0xFF152332)
+                  //     )),
+                  Spacer(),
+                  Text(
+                      'Due: ${assignment.dueDate.month}/${assignment.dueDate.day}/${assignment.dueDate.year}',
+                      style: TextStyle(
+                        color: Color(0xFF152332),
+                      ))
+                ])
+              ]))),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    CollectionReference assignments = FirebaseFirestore.instance.collection('assignments');
+
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: StyleConstants.black,
@@ -46,8 +98,8 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
             alignment: Alignment.center,
             child: TextField(
               onChanged: (input) {
-                searchInput = input;
-                search();
+                // searchInput = input;
+                // search();
               },
               decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -66,103 +118,95 @@ class _AssignmentsScreenState extends State<AssignmentsScreen> {
         ),
       body: Column (
         children: <Widget> [
-          // Container(
-          //     height: 100,
-          //     decoration: BoxDecoration(
-          //       border: Border.all(
-          //           color: Color(0xFF5C6170)
-          //       ),
-          //     ),
-          //     child: Center (
-          //       child: Text(
-          //           'Assignments',
-          //           style: TextStyle (
-          //               fontSize: 35.0,
-          //               color: Color(0xFF152332)
-          //           )
-          //       ),
-          //     )
-          // ),
+
           Expanded(
             child: Container(
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                   color: Color(0xFFE9E9E9)
               ),
-              child: ListView.separated(
-                itemCount: searched.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final Assignment assignment = searched[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                       color: Color(0xFF5C6170)
-                      )
-                    ),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AssignmentPage(assignment: assignment))
-                          ).then((value) {
-                            setState(() {
-                              // refresh state of assignment screen
-                            });
-                          });
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(15),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 215,
-                                    child: Text(
-                                      assignment.title,
-                                        style: TextStyle (
-                                            fontSize: 23.0,
-                                            color: Color(0xFF152332)
-                                        )
-                                    )
-                                  ),
-                                  Text(updateCompletion(assignment.completed), style: TextStyle(
-                                    color: Color(0xFFF78154),
-                                    fontSize: 14.0,
-                                    fontStyle: FontStyle.italic,
-                                  ),),
-                                ]
-                              ),
-                              SizedBox(height: 15),
-                              Row(
-                                children: [
-                                  Text(
-                                      "${assignment.comments.length} comments",
-                                      style: TextStyle (
-                                          color: Color(0xFF152332)
-                                      )),
-                                  Spacer(),
-                                  Text(
-                                      'Due: ${assignment.dueDate.month}/${assignment.dueDate.day}/${assignment.dueDate.year}',
-                                      style: TextStyle (
-                                        color: Color(0xFF152332),
-                                      )
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        )
-                      ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: 15,
-                  );
-                },
-              ),
+              child: StreamBuilder(
+                  stream: assignments
+                      .where('completed', isEqualTo: false)
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return CircularProgressIndicator();
+                    }
+                    return ListView(
+                      children: snapshot.data!.docs.map((assignment) {
+                        // Assignment assignment = Assignment.fromDocument(doc);
+                        // var date = DateTime.parse(assignment['dueDate'].toDate().toString());
+                        // print(assignment['dueDate']);
+                        // return Container(
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.white,
+                        //       border: Border.all(
+                        //           color: Color(0xFF5C6170)
+                        //       )
+                        //   ),
+                        //   child: TextButton(
+                        //       onPressed: () {
+                        //         Navigator.push(
+                        //             context,
+                        //             MaterialPageRoute(builder: (context) => AssignmentPage(assignmentId: assignment.id,))
+                        //         ).then((value) {
+                        //           setState(() {
+                        //             // refresh state of assignment screen
+                        //           });
+                        //         });
+                        //       },
+                        //       child: Container(
+                        //           padding: EdgeInsets.all(15),
+                        //           child: Column(
+                        //               children: [
+                        //                 Row(
+                        //                     children: [
+                        //                       Container(
+                        //                           width: 215,
+                        //                           child: Text(
+                        //                               assignment['title'],
+                        //                               style: TextStyle (
+                        //                                   fontSize: 23.0,
+                        //                                   color: Color(0xFF152332)
+                        //                               )
+                        //                           )
+                        //                       ),
+                        //                       // Text(updateCompletion(assignment.completed), style: TextStyle(
+                        //                       //   color: Color(0xFFF78154),
+                        //                       //   fontSize: 14.0,
+                        //                       //   fontStyle: FontStyle.italic,
+                        //                       // ),),
+                        //                     ]
+                        //                 ),
+                        //                 SizedBox(height: 15),
+                        //                 Row(
+                        //                     children: [
+                        //                       // Text(
+                        //                       //     "${assignment.comments.length} comments",
+                        //                       //     style: TextStyle (
+                        //                       //         color: Color(0xFF152332)
+                        //                       //     )),
+                        //                       Spacer(),
+                        //                       Text(
+                        //                           'Due: ${date.month}/${date.day}/${date.year}',
+                        //                           style: TextStyle (
+                        //                             color: Color(0xFF152332),
+                        //                           )
+                        //                       )
+                        //                     ]
+                        //                 )
+                        //               ]
+                        //           )
+                        //       )
+                        //   ),
+                        // );
+
+                        return assignmentWidget(
+                            Assignment.fromDocument(assignment), assignment.id);
+                      }).toList(),
+                    );
+                  }),
             ),
           ),
         ],
